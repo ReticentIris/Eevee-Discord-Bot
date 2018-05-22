@@ -1,13 +1,16 @@
 package io.reticent.eevee.util;
 
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.Instant;
 
 @Builder
 public class RateLimiter {
     private int currentHits;
+    @Getter
     private int maxHits;
+    @Getter
     private int duration;
     @Builder.Default
     private Instant lastReset = Instant.now();
