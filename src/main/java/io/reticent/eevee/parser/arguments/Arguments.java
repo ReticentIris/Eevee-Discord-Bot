@@ -87,7 +87,7 @@ public class Arguments<ObjectMap> extends Argument {
         return true;
     }
 
-    public void parsePartial(@NonNull Tokenizer tokens, @NonNull Message message, ObjectMap obj) throws NoSuchFieldException, IllegalAccessException {
+    public void parsePartial(@NonNull Tokenizer tokens, @NonNull Message message, @NonNull ObjectMap obj) throws NoSuchFieldException, IllegalAccessException {
         for (Argument arg : arguments) {
             if (!tokens.hasNext()) {
                 return;
@@ -102,6 +102,12 @@ public class Arguments<ObjectMap> extends Argument {
                     tokens.pop();
 
                     for (Argument subArgument : ((Arguments) arg).getArguments()) {
+                        Object defaultValue = subArgument.getOptions().getDefaultValue();
+
+                        if (defaultValue == null) {
+                            continue;
+                        }
+
                         applyValue(obj, subArgument.getName(), subArgument.getOptions().getDefaultValue());
                     }
                 } else {
@@ -116,7 +122,12 @@ public class Arguments<ObjectMap> extends Argument {
                     applyValue(obj, arg.getName(), arg.parse(tokens, message));
                 } else {
                     tokens.pop();
-                    applyValue(obj, arg.getName(), arg.getOptions().getDefaultValue());
+
+                    Object defaultValue = arg.getOptions().getDefaultValue();
+
+                    if (defaultValue != null) {
+                        applyValue(obj, arg.getName(), arg.getOptions().getDefaultValue());
+                    }
                 }
             }
         }

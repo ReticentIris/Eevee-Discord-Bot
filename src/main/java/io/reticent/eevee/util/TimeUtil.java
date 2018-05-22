@@ -15,4 +15,8 @@ public class TimeUtil {
 
         return String.format("%s days %s hours %s minutes %s seconds", days, hours, minutes, seconds);
     }
+
+    public static long dhmsToMilli(double days, double hours, double minutes, double seconds) {
+        return (long) ((days * 24 * 60 * 60 * 1000) + (hours * 60 * 60 * 1000) + (minutes * 60 * 1000) + (seconds * 1000));
+    }
 }

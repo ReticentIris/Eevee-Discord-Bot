@@ -4,6 +4,7 @@ import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.fun.pokemon.BestPokemonCommand;
 import io.reticent.eevee.bot.command.util.avatar.AvatarCommand;
 import io.reticent.eevee.bot.command.util.help.HelpCommand;
+import io.reticent.eevee.bot.command.util.remind.RemindCommand;
 import io.reticent.eevee.bot.command.util.stats.StatsCommand;
 import io.reticent.eevee.bot.command.util.translate.TranslateCommand;
 import io.reticent.eevee.session.Session;
@@ -41,6 +42,7 @@ public class EeveeBot extends ListenerAdapter {
         commandMapper.add(new HelpCommand(commandMapper));
         commandMapper.add(new StatsCommand());
         commandMapper.add(new BestPokemonCommand());
+        commandMapper.add(new RemindCommand());
 
         log.info(String.format("Registered %s commands.", commandMapper.getBotCommands().size()));
     }
