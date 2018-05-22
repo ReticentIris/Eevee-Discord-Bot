@@ -5,6 +5,7 @@ import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
+import io.reticent.eevee.util.Formatter;
 import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -62,7 +63,7 @@ public class F12Command extends Command {
 
         ScriptEngine jsEngine;
 
-        String userId = String.format("%s#%s", event.getAuthor().getName(), event.getAuthor().getDiscriminator());
+        String userId = Formatter.formatTag(event.getAuthor());
 
         log.info(String.format("User %s has invoked: %s", userId, commandString));
 

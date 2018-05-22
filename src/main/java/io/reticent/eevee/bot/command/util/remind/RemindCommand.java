@@ -5,6 +5,7 @@ import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
+import io.reticent.eevee.util.Formatter;
 import io.reticent.eevee.util.TimeUtil;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
@@ -120,7 +121,7 @@ public class RemindCommand extends Command {
                     channel.sendMessage(embedBuilder.build()).queue();
 
                     log.debug(String.format(
-                        "Issued reminder to %s#%s. Reminder thread will die", event.getAuthor().getName(), event.getAuthor().getDiscriminator()
+                        "Issued reminder to %s. Reminder thread will die", Formatter.formatTag(event.getAuthor())
                     ));
                 }, (error) -> {
                     log.error("Failed to issue reminder.", error);
@@ -131,7 +132,7 @@ public class RemindCommand extends Command {
 
         thread.start();
 
-        log.debug(String.format("Spawned new reminder thread for %s#%s.", event.getAuthor().getName(), event.getAuthor().getDiscriminator()));
+        log.debug(String.format("Spawned new reminder thread for %s.", Formatter.formatTag(event.getAuthor())));
 
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle("Reminder");

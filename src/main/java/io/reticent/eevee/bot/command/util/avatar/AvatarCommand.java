@@ -4,6 +4,7 @@ import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
+import io.reticent.eevee.util.Formatter;
 import lombok.NonNull;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -45,10 +46,10 @@ public class AvatarCommand extends Command {
         String avatarUrl;
 
         if (args.getMentionedMember() == null) {
-            userName = event.getAuthor().getName();
+            userName = Formatter.formatTag(event.getAuthor());
             avatarUrl = event.getAuthor().getEffectiveAvatarUrl();
         } else {
-            userName = args.getMentionedMember().getEffectiveName();
+            userName = Formatter.formatTag(args.getMentionedMember().getUser());
             avatarUrl = args.getMentionedMember().getUser().getEffectiveAvatarUrl();
         }
 
