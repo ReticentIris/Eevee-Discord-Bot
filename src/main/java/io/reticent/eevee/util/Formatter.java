@@ -1,9 +1,10 @@
 package io.reticent.eevee.util;
 
+import lombok.NonNull;
 import net.dv8tion.jda.core.entities.User;
 
 public class Formatter {
-    public static String formatTag(User user) {
+    public static String formatTag(@NonNull User user) {
         return String.format("%s#%s", user.getName(), user.getDiscriminator());
     }
 
