@@ -35,7 +35,7 @@ public class CommandMapper {
         log.info(String.format("Registered command: %s.", command.getShortLabel()));
     }
 
-    public Optional<Command> map(@NonNull String messageText, @NonNull MessageReceivedEvent event) {
+    public Optional<Command> get(@NonNull String messageText, @NonNull MessageReceivedEvent event) {
         for (Command command : botCommands) {
             Arguments<? extends CommandArguments> commandArguments = command.getArguments();
 

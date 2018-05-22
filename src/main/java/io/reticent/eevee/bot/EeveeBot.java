@@ -7,6 +7,7 @@ import io.reticent.eevee.bot.command.util.help.HelpCommand;
 import io.reticent.eevee.bot.command.util.remind.RemindCommand;
 import io.reticent.eevee.bot.command.util.stats.StatsCommand;
 import io.reticent.eevee.bot.command.util.translate.TranslateCommand;
+import io.reticent.eevee.bot.command.util.f12.F12Command;
 import io.reticent.eevee.session.Session;
 import io.reticent.eevee.util.RateLimiter;
 import lombok.Builder;
@@ -43,6 +44,7 @@ public class EeveeBot extends ListenerAdapter {
         commandMapper.add(new StatsCommand());
         commandMapper.add(new BestPokemonCommand());
         commandMapper.add(new RemindCommand());
+        commandMapper.add(new F12Command());
 
         log.info(String.format("Registered %s commands.", commandMapper.getBotCommands().size()));
     }
@@ -58,7 +60,7 @@ public class EeveeBot extends ListenerAdapter {
 
         messageText = messageText.substring(botPrefix.length());
 
-        Optional<Command> commandOptional = commandMapper.map(messageText, event);
+        Optional<Command> commandOptional = commandMapper.get(messageText, event);
 
         if (!commandOptional.isPresent()) {
             return;
@@ -66,7 +68,7 @@ public class EeveeBot extends ListenerAdapter {
 
         Command command = commandOptional.get();
 
-        if (!isBotOwner(event.getAuthor().getId()) && !canInvoke(command, event)) {
+        if (!isBotOwner(event.getAuthor().getId()) && command.requiresBotOwner() && !canInvoke(command, event)) {
             return;
         }
 

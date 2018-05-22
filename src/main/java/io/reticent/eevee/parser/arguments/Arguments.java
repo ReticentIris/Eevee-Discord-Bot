@@ -51,7 +51,7 @@ public class Arguments<ObjectMap> extends Argument {
             return obj;
         } catch (InstantiationException|IllegalAccessException|NoSuchFieldException e) {
             e.printStackTrace();
-            throw new ArgumentMappingException("Failed to parse and map command arguments.");
+            throw new ArgumentMappingException("Failed to parse and get command arguments.");
         }
     }
 

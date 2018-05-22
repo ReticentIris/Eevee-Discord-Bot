@@ -19,6 +19,10 @@ public abstract class Command {
 
     public void bootstrap() {}
 
+    public boolean requiresBotOwner() {
+        return false;
+    }
+
     public Command withPermissionsRequired(Permission[] permissionRequired) {
         setPermissionRequired(permissionRequired);
         return this;

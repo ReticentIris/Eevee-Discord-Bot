@@ -28,6 +28,7 @@
     <orderEntry type="library" name="Gradle: io.opencensus:opencensus-contrib-http-util:0.11.1" level="project" />
     <orderEntry type="library" name="Gradle: io.opencensus:opencensus-api:0.11.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:25.0-jre" level="project" />
+    <orderEntry type="library" name="Gradle: org.python:jython-standalone:2.7.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client:1.23.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-appengine:1.23.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-jackson:1.23.0" level="project" />
