@@ -6,6 +6,7 @@ import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
 import io.reticent.eevee.util.TimeUtil;
+import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -93,7 +94,7 @@ public class RemindCommand extends Command {
     }
 
     @Override
-    public void invoke(MessageReceivedEvent event, CommandArguments arguments) throws InvalidConfigurationException {
+    public void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) throws InvalidConfigurationException {
         RemindCommandArguments args = (RemindCommandArguments) arguments;
         String remindAction = args.getAction().stream().collect(Collectors.joining(" "));
 

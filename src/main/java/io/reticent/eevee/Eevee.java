@@ -9,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.Game;
 
 import javax.security.auth.login.LoginException;
 
@@ -28,6 +29,7 @@ public class Eevee {
             bot.registerCommands();
 
             JDA jda = new JDABuilder(AccountType.BOT).setToken(configuration.readString("botToken"))
+                                                     .setGame(Game.playing("ev help"))
                                                      .addEventListener(bot)
                                                      .buildBlocking();
             Session.setJdaClient(jda);
