@@ -3,7 +3,6 @@ package io.reticent.eevee.bot.command.util.help;
 import io.reticent.eevee.bot.CommandMapper;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
-import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
 import net.dv8tion.jda.core.EmbedBuilder;

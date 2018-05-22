@@ -70,7 +70,7 @@ public class EeveeBot extends ListenerAdapter {
         try {
             command.invoke(event, command.getArguments().parse(messageText, event.getMessage()));
         } catch (RuntimeException e) {
-            log.error("Failed to execute command due to unhandled runtime exception.\nCommand:%s\n", command.getShortLabel(), e);
+            log.error(String.format("Failed to execute command due to unhandled runtime exception.\nCommand:%s\n", command.getShortLabel()), e);
             event.getTextChannel().sendMessage(String.format("Failed to execute command:\n%s", e.getMessage())).queue();
         }
     }
