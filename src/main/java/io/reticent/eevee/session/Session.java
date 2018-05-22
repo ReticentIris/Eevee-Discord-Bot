@@ -1,6 +1,8 @@
 package io.reticent.eevee.session;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reticent.eevee.configuration.Configuration;
+import io.reticent.eevee.repository.ReminderDataRepository;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -15,4 +17,12 @@ public class Session {
     @Setter
     @NonNull
     private static JDA jdaClient;
+    @Getter
+    @Setter
+    @NonNull
+    private static ReminderDataRepository reminderDataRepository;
+    @Getter
+    @Setter
+    @NonNull
+    private static ObjectMapper objectMapper;
 }

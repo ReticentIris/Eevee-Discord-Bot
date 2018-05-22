@@ -13,6 +13,8 @@
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-core:2.11.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-api:2.11.0" level="project" />
     <orderEntry type="library" name="Gradle: net.dv8tion:JDA:3.6.0_367" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.5" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.9.5" level="project" />
     <orderEntry type="library" name="Gradle: com.google.cloud:google-cloud-translate:1.28.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.cloud:google-cloud-core-http:1.28.0" level="project" />
@@ -29,7 +31,6 @@
     <orderEntry type="library" name="Gradle: io.opencensus:opencensus-contrib-http-util:0.11.1" level="project" />
     <orderEntry type="library" name="Gradle: io.opencensus:opencensus-api:0.11.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:25.0-jre" level="project" />
-    <orderEntry type="library" name="Gradle: org.python:jython-standalone:2.7.1" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client:1.23.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-appengine:1.23.0" level="project" />

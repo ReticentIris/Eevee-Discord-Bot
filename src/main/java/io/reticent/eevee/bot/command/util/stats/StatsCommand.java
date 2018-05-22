@@ -16,6 +16,7 @@ import java.time.Instant;
 public class StatsCommand extends Command {
     private Instant startTime;
 
+    @Override
     public void bootstrap() {
         startTime = Instant.now();
     }

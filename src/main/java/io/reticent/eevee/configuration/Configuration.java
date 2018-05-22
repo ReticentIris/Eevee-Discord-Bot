@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.exc.InvalidConfigurationKeyException;
+import io.reticent.eevee.session.Session;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
@@ -81,7 +82,7 @@ public class Configuration {
         }
 
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper = Session.getObjectMapper();
             TypeReference<HashMap<String, Object>> genericTypeReference = new TypeReference<HashMap<String, Object>>() {
             };
             data = objectMapper.<HashMap<String, Object>>readValue(file, genericTypeReference);
