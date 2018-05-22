@@ -9,6 +9,7 @@ import io.reticent.eevee.bot.command.util.translate.TranslateCommand;
 import io.reticent.eevee.session.Session;
 import io.reticent.eevee.util.RateLimiter;
 import lombok.Builder;
+import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -45,7 +46,7 @@ public class EeveeBot extends ListenerAdapter {
     }
 
     @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
+    public void onMessageReceived(@NonNull MessageReceivedEvent event) {
         String messageText = event.getMessage().getContentRaw().trim();
         String botPrefix = Session.getConfiguration().readString("botPrefix");
 
@@ -75,11 +76,11 @@ public class EeveeBot extends ListenerAdapter {
         }
     }
 
-    private boolean isBotOwner(String id) {
+    private boolean isBotOwner(@NonNull String id) {
         return id.equals(Session.getConfiguration().readString("botOwnerId"));
     }
 
-    private boolean canInvoke(Command command, MessageReceivedEvent event) {
+    private boolean canInvoke(@NonNull Command command, @NonNull MessageReceivedEvent event) {
         RateLimiter rateLimiter = command.getRateLimiter();
 
         if (rateLimiter != null && !rateLimiter.tryIncrement()) {

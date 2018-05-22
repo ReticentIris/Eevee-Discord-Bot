@@ -1,9 +1,11 @@
 package io.reticent.eevee.util;
 
+import lombok.NonNull;
+
 import java.time.Duration;
 
 public class TimeUtil {
-    public static String durationToDDHHMMSS(Duration duration) {
+    public static String durationToDDHHMMSS(@NonNull Duration duration) {
         int durationSeconds = (int) duration.getSeconds();
 
         int days = durationSeconds / (24 * 3600);

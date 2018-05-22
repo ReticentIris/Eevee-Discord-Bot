@@ -4,6 +4,7 @@ import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
+import lombok.NonNull;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -38,7 +39,7 @@ public class AvatarCommand extends Command {
     }
 
     @Override
-    public void invoke(MessageReceivedEvent event, CommandArguments arguments) {
+    public void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) {
         AvatarCommandArguments args = (AvatarCommandArguments) arguments;
         String userName;
         String avatarUrl;

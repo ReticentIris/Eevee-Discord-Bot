@@ -4,6 +4,7 @@ import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.parser.arguments.Arguments;
 import io.reticent.eevee.util.RateLimiter;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -22,7 +23,7 @@ public abstract class Command {
         return this;
     }
 
-    public Command withRateLimiter(RateLimiter rateLimiter) {
+    public Command withRateLimiter(@NonNull RateLimiter rateLimiter) {
         setRateLimiter(rateLimiter);
         return this;
     }
@@ -35,5 +36,5 @@ public abstract class Command {
     public abstract String getLabel();
     public abstract String getDescription();
     public abstract Arguments<? extends CommandArguments> getArguments();
-    public abstract void invoke(MessageReceivedEvent event, CommandArguments arguments) throws InvalidConfigurationException;
+    public abstract void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) throws InvalidConfigurationException;
 }

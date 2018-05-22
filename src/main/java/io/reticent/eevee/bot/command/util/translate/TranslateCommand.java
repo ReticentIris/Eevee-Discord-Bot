@@ -9,6 +9,7 @@ import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
+import lombok.NonNull;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -42,14 +43,13 @@ public class TranslateCommand extends Command {
     }
 
     @Override
-    public void invoke(MessageReceivedEvent event, CommandArguments arguments) {
+    public void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) {
         TranslateCommandArguments args = (TranslateCommandArguments) arguments;
         Translate translate = TranslateOptions.getDefaultInstance().getService();
 
         String sourceText = args.getSourceText().stream().collect(Collectors.joining(" "));
 
         try {
-
             Translation translation = translate.translate(
                 sourceText,
                 TranslateOption.targetLanguage(args.getTargetLanguage())

@@ -16,7 +16,7 @@ public abstract class Argument {
                                                      .required(true)
                                                      .build();
 
-    public Argument withOptions(ArgumentOptions options) {
+    public Argument withOptions(@NonNull ArgumentOptions options) {
         setOptions(options);
         return this;
     }

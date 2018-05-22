@@ -4,6 +4,7 @@ import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.Arguments;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -16,7 +17,7 @@ public class CommandMapper {
     @Getter
     private List<Command> botCommands;
 
-    public void add(Command command) {
+    public void add(@NonNull Command command) {
         if (botCommands == null) {
             botCommands = new LinkedList<>();
         }
@@ -34,7 +35,7 @@ public class CommandMapper {
         log.info(String.format("Registered command: %s.", command.getShortLabel()));
     }
 
-    public Optional<Command> map(String messageText, MessageReceivedEvent event) {
+    public Optional<Command> map(@NonNull String messageText, @NonNull MessageReceivedEvent event) {
         for (Command command : botCommands) {
             Arguments<? extends CommandArguments> commandArguments = command.getArguments();
 

@@ -1,9 +1,9 @@
 package io.reticent.eevee.exc;
 
-import java.io.IOException;
+import lombok.NonNull;
 
 public class InvalidConfigurationException extends RuntimeException {
-    public InvalidConfigurationException(String message) {
+    public InvalidConfigurationException(@NonNull String message) {
         super(message);
     }
 }

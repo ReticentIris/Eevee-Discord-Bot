@@ -5,6 +5,7 @@ import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
 import io.reticent.eevee.util.TimeUtil;
+import lombok.NonNull;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -44,7 +45,7 @@ public class StatsCommand extends Command {
     }
 
     @Override
-    public void invoke(MessageReceivedEvent event, CommandArguments arguments) {
+    public void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) {
         Instant now = Instant.now();
         Duration uptime = Duration.between(startTime, now);
         String uptimeString = TimeUtil.durationToDDHHMMSS(uptime);

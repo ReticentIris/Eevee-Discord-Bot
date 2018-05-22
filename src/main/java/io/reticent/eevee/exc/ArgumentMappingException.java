@@ -1,7 +1,9 @@
 package io.reticent.eevee.exc;
 
+import lombok.NonNull;
+
 public class ArgumentMappingException extends RuntimeException {
-    public ArgumentMappingException(String message) {
+    public ArgumentMappingException(@NonNull String message) {
         super(message);
     }
 }
