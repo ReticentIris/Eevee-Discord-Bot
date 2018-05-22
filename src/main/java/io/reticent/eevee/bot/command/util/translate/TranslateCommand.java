@@ -10,11 +10,13 @@ import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
 import lombok.NonNull;
+import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.stream.Collectors;
 
+@Log4j2
 public class TranslateCommand extends Command {
     @Override
     public String getShortLabel() {
@@ -69,6 +71,8 @@ public class TranslateCommand extends Command {
 
             event.getTextChannel().sendMessage(embedBuilder.build()).queue();
         } catch (TranslateException e) {
+            log.error("Failed to translate provided text.", e);
+
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.setTitle("Error");
             embedBuilder.appendDescription("Could not recognize target language code.");
