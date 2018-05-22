@@ -1,6 +1,7 @@
 package io.reticent.eevee.bot;
 
 import io.reticent.eevee.bot.command.Command;
+import io.reticent.eevee.bot.command.fun.pokemon.BestPokemonCommand;
 import io.reticent.eevee.bot.command.util.avatar.AvatarCommand;
 import io.reticent.eevee.bot.command.util.help.HelpCommand;
 import io.reticent.eevee.bot.command.util.stats.StatsCommand;
@@ -38,6 +39,7 @@ public class EeveeBot extends ListenerAdapter {
         ));
         commandMapper.add(new HelpCommand(commandMapper));
         commandMapper.add(new StatsCommand());
+        commandMapper.add(new BestPokemonCommand());
 
         log.info(String.format("Registered %s commands.", commandMapper.getBotCommands().size()));
     }
@@ -65,7 +67,12 @@ public class EeveeBot extends ListenerAdapter {
             return;
         }
 
-        command.invoke(event, command.getArguments().parse(messageText, event.getMessage()));
+        try {
+            command.invoke(event, command.getArguments().parse(messageText, event.getMessage()));
+        } catch (RuntimeException e) {
+            log.error("Failed to execute command due to unhandled runtime exception.\nCommand:%s\n", command.getShortLabel(), e);
+            event.getTextChannel().sendMessage(String.format("Failed to execute command:\n%s", e.getMessage())).queue();
+        }
     }
 
     private boolean isBotOwner(String id) {

@@ -12,6 +12,7 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Builder
@@ -53,20 +54,20 @@ public class Configuration {
         return (Boolean) readObject(key);
     }
 
-    public String[] readStringArray(@NonNull String key) throws InvalidConfigurationException {
-        return (String[]) readObject(key);
+    public List<String> readStringList(@NonNull String key) throws InvalidConfigurationException {
+        return (List<String>) readObject(key);
     }
 
-    public int[] readIntArray(@NonNull String key) throws InvalidConfigurationException {
-        return (int[]) readObject(key);
+    public List<Integer> readIntArray(@NonNull String key) throws InvalidConfigurationException {
+        return (List<Integer>) readObject(key);
     }
 
-    public double[] readDoubleArray(@NonNull String key) throws InvalidConfigurationException {
-        return (double[]) readObject(key);
+    public List<Double> readDoubleArray(@NonNull String key) throws InvalidConfigurationException {
+        return (List<Double>) readObject(key);
     }
 
-    public boolean[] readBooleanArray(@NonNull String key) throws InvalidConfigurationException {
-        return (boolean[]) readObject(key);
+    public List<Boolean> readBooleanArray(@NonNull String key) throws InvalidConfigurationException {
+        return (List<Boolean>) readObject(key);
     }
 
     private void loadData() throws InvalidConfigurationException {

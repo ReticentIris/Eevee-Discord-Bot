@@ -50,7 +50,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void invoke(MessageReceivedEvent event, CommandArguments arguments) throws InvalidConfigurationException {
+    public void invoke(MessageReceivedEvent event, CommandArguments arguments) {
         HelpCommandArguments args = (HelpCommandArguments) arguments;
 
         if (args.getCommandShortName() == null) {

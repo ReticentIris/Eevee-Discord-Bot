@@ -45,7 +45,7 @@ public class StatsCommand extends Command {
     }
 
     @Override
-    public void invoke(MessageReceivedEvent event, CommandArguments arguments) throws InvalidConfigurationException {
+    public void invoke(MessageReceivedEvent event, CommandArguments arguments) {
         Instant now = Instant.now();
         Duration uptime = Duration.between(startTime, now);
         String uptimeString = TimeUtil.durationToDDHHMMSS(uptime);
