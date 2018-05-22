@@ -3,6 +3,7 @@ package io.reticent.eevee.bot;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.util.avatar.AvatarCommand;
 import io.reticent.eevee.bot.command.util.help.HelpCommand;
+import io.reticent.eevee.bot.command.util.stats.StatsCommand;
 import io.reticent.eevee.bot.command.util.translate.TranslateCommand;
 import io.reticent.eevee.session.Session;
 import io.reticent.eevee.util.RateLimiter;
@@ -36,6 +37,7 @@ public class EeveeBot extends ListenerAdapter {
                        .build()
         ));
         commandMapper.add(new HelpCommand(commandMapper));
+        commandMapper.add(new StatsCommand());
 
         log.info(String.format("Registered %s commands.", commandMapper.getBotCommands().size()));
     }

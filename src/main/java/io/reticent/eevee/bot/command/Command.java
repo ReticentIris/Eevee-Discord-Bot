@@ -15,6 +15,8 @@ public abstract class Command {
     @Setter
     private RateLimiter rateLimiter;
 
+    public void bootstrap() {}
+
     public Command withPermissionsRequired(int permissionRequired) {
         setPermissionRequired(permissionRequired);
         return this;

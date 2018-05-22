@@ -37,7 +37,6 @@ public class HelpCommand extends Command {
 
     @Override
     public Arguments<? extends CommandArguments> getArguments() {
-
         Argument[] argsArray = {
             new LiteralArgument("help"),
             new StringArgument("commandShortName").withOptions(

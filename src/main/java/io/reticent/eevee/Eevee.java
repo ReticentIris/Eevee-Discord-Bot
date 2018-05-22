@@ -30,6 +30,7 @@ public class Eevee {
             JDA jda = new JDABuilder(AccountType.BOT).setToken(configuration.readString("botToken"))
                                                      .addEventListener(bot)
                                                      .buildBlocking();
+            Session.setJdaClient(jda);
         } catch (LoginException | InterruptedException | InvalidConfigurationException e) {
             e.printStackTrace();
         }

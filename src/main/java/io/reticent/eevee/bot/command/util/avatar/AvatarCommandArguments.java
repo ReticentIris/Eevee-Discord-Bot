@@ -6,5 +6,5 @@ import net.dv8tion.jda.core.entities.Member;
 
 public class AvatarCommandArguments extends CommandArguments {
     @Getter
-    Member mentionedMember;
+    private Member mentionedMember;
 }

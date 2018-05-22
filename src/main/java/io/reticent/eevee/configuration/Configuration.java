@@ -27,10 +27,10 @@ public class Configuration {
         }
 
         if (data.containsKey(key)) {
-            log.debug(String.format("Found value with key: %s. Attempting to return.", key));
+            log.debug(String.format("Found value for key: %s. Attempting to return.", key));
             return data.get(key);
         } else {
-            log.error(String.format("Attempted to read String with invalid key: %s.", key));
+            log.error(String.format("Attempted to read String for invalid key: %s.", key));
             throw new InvalidConfigurationKeyException(
                 String.format("The requested key \"%s\" does not exist.", key)
             );

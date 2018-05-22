@@ -9,5 +9,5 @@ public class TranslateCommandArguments extends CommandArguments {
     @Getter
     String targetLanguage;
     @Getter
-    List<String> sourceText;
+    private List<String> sourceText;
 }

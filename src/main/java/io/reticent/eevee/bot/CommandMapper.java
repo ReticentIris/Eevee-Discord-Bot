@@ -21,6 +21,14 @@ public class CommandMapper {
             botCommands = new LinkedList<>();
         }
 
+        try {
+            command.bootstrap();
+        } catch (RuntimeException e) {
+            log.error("Failed to bootstrap command: %s.", command.getShortLabel());
+            log.error("Skipping command: %s.", command.getShortLabel());
+            return;
+        }
+
         botCommands.add(command);
 
         log.info(String.format("Registered command: %s.", command.getShortLabel()));
