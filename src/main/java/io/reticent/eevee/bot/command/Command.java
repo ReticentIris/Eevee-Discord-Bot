@@ -6,19 +6,20 @@ import io.reticent.eevee.util.RateLimiter;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public abstract class Command {
     @Getter
     @Setter
-    private int permissionRequired;
+    private Permission[] permissionRequired;
     @Getter
     @Setter
     private RateLimiter rateLimiter;
 
     public void bootstrap() {}
 
-    public Command withPermissionsRequired(int permissionRequired) {
+    public Command withPermissionsRequired(Permission[] permissionRequired) {
         setPermissionRequired(permissionRequired);
         return this;
     }
