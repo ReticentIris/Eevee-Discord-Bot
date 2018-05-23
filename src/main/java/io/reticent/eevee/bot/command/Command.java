@@ -16,7 +16,7 @@ public abstract class Command {
         return false;
     }
 
-    public Permission[] getPermissionsRequired() {
+    public Permission[] getRequiredPermissions() {
         return new Permission[]{};
     }
 
@@ -32,5 +32,5 @@ public abstract class Command {
     public abstract String getLabel();
     public abstract String getDescription();
     public abstract Arguments<? extends CommandArguments> getArguments();
-    public abstract void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) throws InvalidConfigurationException;
+    public abstract void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments);
 }

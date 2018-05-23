@@ -63,6 +63,6 @@ public class StatsCommand extends Command {
         embedBuilder.addField("Member Count", numberOfMembers + "", false);
         embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
 
-        event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+        event.getChannel().sendMessage(embedBuilder.build()).queue();
     }
 }

@@ -77,7 +77,7 @@ public class F12Command extends Command {
             embedBuilder.setDescription("_Exited interactive shell._");
             embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
 
-            event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+            event.getChannel().sendMessage(embedBuilder.build()).queue();
 
             return;
         }
@@ -104,14 +104,14 @@ public class F12Command extends Command {
             embedBuilder.setDescription(result == null ? "_No Output_" : result.toString());
             embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
 
-            event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+            event.getChannel().sendMessage(embedBuilder.build()).queue();
         } catch (ScriptException e) {
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.setTitle("Interactive Shell");
             embedBuilder.setDescription(e.getMessage());
             embedBuilder.setColor(Session.getConfiguration().readInt("errorEmbedColorDecimal"));
 
-            event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+            event.getChannel().sendMessage(embedBuilder.build()).queue();
         }
     }
 }

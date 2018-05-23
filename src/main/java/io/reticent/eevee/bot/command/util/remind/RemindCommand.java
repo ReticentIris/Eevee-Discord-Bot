@@ -132,7 +132,7 @@ public class RemindCommand extends Command {
         embedBuilder.setDescription(remindAction);
         embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
 
-        event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+        event.getChannel().sendMessage(embedBuilder.build()).queue();
     }
 
     private void spawnReminderThread(@NonNull Reminder reminder) {

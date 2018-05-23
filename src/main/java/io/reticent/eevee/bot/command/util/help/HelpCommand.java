@@ -70,7 +70,7 @@ public class HelpCommand extends Command {
                 embedBuilder.addField(command.getLabel(), String.format("help %s", command.getShortLabel()), true);
             });
 
-            event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+            event.getChannel().sendMessage(embedBuilder.build()).queue();
         } else {
             Optional<Command> commandOptional = commandMapper.getBotCommands()
                                                              .stream()
@@ -82,7 +82,7 @@ public class HelpCommand extends Command {
                 embedBuilder.setDescription("Invalid command specified.");
                 embedBuilder.setColor(Session.getConfiguration().readInt("errorEmbedColorDecimal"));
 
-                event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+                event.getChannel().sendMessage(embedBuilder.build()).queue();
             } else {
                 Command command = commandOptional.get();
 
@@ -93,7 +93,7 @@ public class HelpCommand extends Command {
                 embedBuilder.addField("Rate Limit", Formatter.formatRateLimit(command.getRateLimiter()), true);
                 embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
 
-                event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+                event.getChannel().sendMessage(embedBuilder.build()).queue();
             }
         }
     }

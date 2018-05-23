@@ -9,6 +9,7 @@ import io.reticent.eevee.session.Session;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -39,6 +40,10 @@ public class HSReleaseAnnouncerDataRepository extends DataRepository {
         return ImmutableList.copyOf(MONGO_COLLECTION.find());
     }
 
+    public Optional<HSReleaseAnnouncer> getAnnouncer(String announcerId) {
+        return getAnnouncers().stream().filter(announcer -> announcer.getAnnouncerId().equals(announcerId)).findFirst();
+    }
+
     public void add(HSReleaseAnnouncer announcer) {
         MONGO_COLLECTION.insertOne(announcer);
     }
@@ -47,7 +52,7 @@ public class HSReleaseAnnouncerDataRepository extends DataRepository {
         MONGO_COLLECTION.replaceOne(eq("announcerId", announcer.getAnnouncerId()), announcer);
     }
 
-    public void remove(HSReleaseAnnouncer announcer) {
-        MONGO_COLLECTION.deleteOne(eq("announcerId", announcer.getAnnouncerId()));
+    public void remove(String announcerId) {
+        MONGO_COLLECTION.deleteOne(eq("announcerId", announcerId));
     }
 }

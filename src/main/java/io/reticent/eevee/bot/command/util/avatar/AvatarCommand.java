@@ -58,6 +58,6 @@ public class AvatarCommand extends Command {
         embedBuilder.setImage(avatarUrl);
         embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
 
-        event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+        event.getChannel().sendMessage(embedBuilder.build()).queue();
     }
 }

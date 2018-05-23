@@ -1,7 +1,9 @@
 package io.reticent.eevee.bot;
 
 import io.reticent.eevee.bot.command.Command;
+import io.reticent.eevee.bot.command.fun.anime.horriblesubs.HSReleaseListCommand;
 import io.reticent.eevee.bot.command.fun.anime.horriblesubs.HSReleaseSubscribeCommand;
+import io.reticent.eevee.bot.command.fun.anime.horriblesubs.HSReleaseUnsubscribeCommand;
 import io.reticent.eevee.bot.command.fun.pokemon.BestPokemonCommand;
 import io.reticent.eevee.bot.command.util.avatar.AvatarCommand;
 import io.reticent.eevee.bot.command.util.help.HelpCommand;
@@ -43,6 +45,8 @@ public class EeveeBot extends ListenerAdapter {
         commandMapper.add(new RemindCommand());
         commandMapper.add(new F12Command());
         commandMapper.add(new HSReleaseSubscribeCommand());
+        commandMapper.add(new HSReleaseListCommand());
+        commandMapper.add(new HSReleaseUnsubscribeCommand());
 
         log.info(String.format("Registered %s commands.", commandMapper.getBotCommands().size()));
     }
@@ -74,7 +78,7 @@ public class EeveeBot extends ListenerAdapter {
             command.invoke(event, command.getArguments().parse(messageText, event.getMessage()));
         } catch (RuntimeException e) {
             log.error(String.format("Failed to execute command due to unhandled runtime exception.\nCommand:%s\n", command.getShortLabel()), e);
-            event.getTextChannel().sendMessage(String.format("Failed to execute command:\n%s", e.getMessage())).queue();
+            // event.getChannel().sendMessage(String.format("Failed to execute command:\n%s", e.getMessage())).queue();
         }
     }
 
@@ -89,7 +93,7 @@ public class EeveeBot extends ListenerAdapter {
             return false;
         }
 
-        Permission[] permissions = command.getPermissionsRequired();
+        Permission[] permissions = command.getRequiredPermissions();
 
         return event.getMember().hasPermission(permissions);
     }

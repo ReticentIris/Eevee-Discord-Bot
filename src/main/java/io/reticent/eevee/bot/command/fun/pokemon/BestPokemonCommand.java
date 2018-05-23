@@ -49,6 +49,6 @@ public class BestPokemonCommand extends Command {
         embedBuilder.setImage(eevees.get(index));
         embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
 
-        event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+        event.getChannel().sendMessage(embedBuilder.build()).queue();
     }
 }

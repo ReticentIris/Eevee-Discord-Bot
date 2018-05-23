@@ -7,6 +7,8 @@ import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
+import io.reticent.eevee.configuration.GlobalConfiguration;
+import io.reticent.eevee.exc.InvalidRuntimeEnvironmentException;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
 import io.reticent.eevee.util.RateLimiter;
@@ -19,6 +21,18 @@ import java.util.stream.Collectors;
 
 @Log4j2
 public class TranslateCommand extends Command {
+    @Override
+    public void bootstrap() {
+        if (System.getenv(GlobalConfiguration.GOOGLE_API_CRED_ENV_VAR_NAME) == null) {
+            throw new InvalidRuntimeEnvironmentException(
+                String.format(
+                    "Missing environment variable: %s. This command cannot function without it.",
+                    GlobalConfiguration.GOOGLE_API_CRED_ENV_VAR_NAME
+                )
+            );
+        }
+    }
+
     @Override
     public String getShortLabel() {
         return "translate";
@@ -78,7 +92,7 @@ public class TranslateCommand extends Command {
             embedBuilder.addField("Translation:", translation.getTranslatedText(), false);
             embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
 
-            event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+            event.getChannel().sendMessage(embedBuilder.build()).queue();
         } catch (TranslateException e) {
             log.error("Failed to translate provided text.", e);
 
@@ -87,7 +101,7 @@ public class TranslateCommand extends Command {
             embedBuilder.appendDescription("Could not recognize target language code.");
             embedBuilder.setColor(Session.getConfiguration().readInt("errorEmbedColorDecimal"));
 
-            event.getTextChannel().sendMessage(embedBuilder.build()).queue();
+            event.getChannel().sendMessage(embedBuilder.build()).queue();
         }
     }
 }

@@ -9,4 +9,5 @@ public class GlobalConfiguration {
     public static final String REMINDER_DATA_REPOSITORY_PATH = "data/reminders.json";
     public static final String HS_RELEASE_NOTIFICATION_DATA_REPOSITORY_PATH = "data/hs_release_notifications.json";
     public static final String HORRIBLE_SUBS_RELEASE_FEED_RUL = "http://horriblesubs.info/rss.php?res=all";
+    public static final String GOOGLE_API_CRED_ENV_VAR_NAME = "GOOGLE_APPLICATION_CREDENTIALS";
 }
