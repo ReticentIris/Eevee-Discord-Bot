@@ -1,5 +1,6 @@
 package io.reticent.eevee.bot.command.fun.anime.horriblesubs;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.exc.InvalidConfigurationException;
@@ -8,8 +9,6 @@ import io.reticent.eevee.provider.HSReleaseDataProvider;
 import io.reticent.eevee.provider.UUIDProvider;
 import io.reticent.eevee.provider.model.HSReleaseData;
 import io.reticent.eevee.repository.model.HSReleaseAnnouncer;
-import io.reticent.eevee.rss.HorribleSubsReleaseReader;
-import io.reticent.eevee.rss.model.HorribleSubsReleaseItem;
 import io.reticent.eevee.session.Session;
 import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -19,7 +18,6 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @Log4j2
 public class HSReleaseSubscribeCommand extends Command {
@@ -114,7 +112,7 @@ public class HSReleaseSubscribeCommand extends Command {
                     List<HSReleaseAnnouncer> test = toNotifyList.stream()
                                                                 .filter(a -> a.getAnime().equalsIgnoreCase(releaseData.getTitle()))
                                                                 .filter(a -> a.getLastEpisode() < releaseData.getEpisode())
-                                                                .filter(a -> a.getQuality().equalsIgnoreCase(releaseData.getQuality())).collect(Collectors.toList());
+                                                                .filter(a -> a.getQuality().equalsIgnoreCase(releaseData.getQuality())).collect(ImmutableList.toImmutableList());
 
                     log.debug(String.format("Found %s matching announcers for release: %s", test.size(), releaseData));
 
