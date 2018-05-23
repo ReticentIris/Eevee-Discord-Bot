@@ -1,6 +1,7 @@
 package io.reticent.eevee.bot;
 
 import io.reticent.eevee.bot.command.Command;
+import io.reticent.eevee.bot.command.fun.anime.horriblesubs.HSReleaseAnnounceCommand;
 import io.reticent.eevee.bot.command.fun.pokemon.BestPokemonCommand;
 import io.reticent.eevee.bot.command.util.avatar.AvatarCommand;
 import io.reticent.eevee.bot.command.util.help.HelpCommand;
@@ -13,6 +14,7 @@ import io.reticent.eevee.util.RateLimiter;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -34,17 +36,13 @@ public class EeveeBot extends ListenerAdapter {
         commandMapper = new CommandMapper();
 
         commandMapper.add(new AvatarCommand());
-        commandMapper.add(new TranslateCommand().withRateLimiter(
-            RateLimiter.builder()
-                       .maxHits(2)
-                       .duration(15000) // 15 seconds
-                       .build()
-        ));
+        commandMapper.add(new TranslateCommand());
         commandMapper.add(new HelpCommand(commandMapper));
         commandMapper.add(new StatsCommand());
         commandMapper.add(new BestPokemonCommand());
         commandMapper.add(new RemindCommand());
         commandMapper.add(new F12Command());
+        commandMapper.add(new HSReleaseAnnounceCommand());
 
         log.info(String.format("Registered %s commands.", commandMapper.getBotCommands().size()));
     }
@@ -91,6 +89,8 @@ public class EeveeBot extends ListenerAdapter {
             return false;
         }
 
-        return true;
+        Permission[] permissions = command.getPermissionsRequired();
+
+        return event.getMember().hasPermission(permissions);
     }
 }

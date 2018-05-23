@@ -78,7 +78,7 @@ public class HelpCommand extends Command {
                                                              .findFirst();
 
             if (!commandOptional.isPresent()) {
-                embedBuilder.setTitle("Error");
+                embedBuilder.setTitle("Oops! An error occurred.");
                 embedBuilder.setDescription("Invalid command specified.");
                 embedBuilder.setColor(Session.getConfiguration().readInt("errorEmbedColorDecimal"));
 

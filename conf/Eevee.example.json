@@ -5,6 +5,9 @@
   "defaultEmbedColorDecimal": 14990580,
   "errorEmbedColorHex": "#d37494",
   "errorEmbedColorDecimal": 13857940,
+  "successEmbedColorHex": "#aaf7d1",
+  "successEmbedColorDecimal": 11204561,
   "botOwnerId": "",
+  "animeReleaseDetailExtractionRegex": "\\[(.+)\\][ _]+(.+?)[ _]*-?[ _]*(\\d+)[ _]*((\\[|\\().*((480|720|1080|BD)p?).*(\\]|\\)))?([ _]*\\[.+][ _]*)?\\.(\\w+)",
   "eevees": []
 }

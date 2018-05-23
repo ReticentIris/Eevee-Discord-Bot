@@ -4,7 +4,7 @@ import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.exc.DataRepositoryException;
 import io.reticent.eevee.exc.InvalidConfigurationException;
-import io.reticent.eevee.model.Reminder;
+import io.reticent.eevee.repository.model.Reminder;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
 import io.reticent.eevee.util.Formatter;
@@ -133,8 +133,8 @@ public class RemindCommand extends Command {
         log.debug(String.format("Spawned new reminder thread for %s.", Formatter.formatTag(event.getAuthor())));
 
         EmbedBuilder embedBuilder = new EmbedBuilder();
-        embedBuilder.setTitle("Reminder");
-        embedBuilder.setDescription(String.format("Okay. I will remind you to: %s", remindAction));
+        embedBuilder.setTitle("Okay. I will remind you to...");
+        embedBuilder.setDescription(remindAction);
         embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
 
         event.getTextChannel().sendMessage(embedBuilder.build()).queue();

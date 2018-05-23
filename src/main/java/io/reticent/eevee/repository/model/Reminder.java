@@ -1,4 +1,4 @@
-package io.reticent.eevee.model;
+package io.reticent.eevee.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

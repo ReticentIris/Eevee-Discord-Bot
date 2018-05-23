@@ -10,27 +10,18 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public abstract class Command {
-    @Getter
-    @Setter
-    private Permission[] permissionRequired;
-    @Getter
-    @Setter
-    private RateLimiter rateLimiter;
-
     public void bootstrap() {}
 
     public boolean requiresBotOwner() {
         return false;
     }
 
-    public Command withPermissionsRequired(Permission[] permissionRequired) {
-        setPermissionRequired(permissionRequired);
-        return this;
+    public Permission[] getPermissionsRequired() {
+        return new Permission[]{};
     }
 
-    public Command withRateLimiter(@NonNull RateLimiter rateLimiter) {
-        setRateLimiter(rateLimiter);
-        return this;
+    public RateLimiter getRateLimiter() {
+        return null;
     }
 
     public String toString() {

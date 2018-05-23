@@ -25,8 +25,8 @@ public class CommandMapper {
         try {
             command.bootstrap();
         } catch (RuntimeException e) {
-            log.error("Failed to bootstrap command: %s.", command.getShortLabel());
-            log.error("Skipping command: %s.", command.getShortLabel());
+            log.error(String.format("Failed to bootstrap command: %s.", command.getShortLabel()), e);
+            log.info(String.format("Skipping command: %s.", command.getShortLabel()));
             return;
         }
 

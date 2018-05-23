@@ -3,9 +3,10 @@ package io.reticent.eevee.repository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.reticent.eevee.configuration.GlobalConfiguration;
 import io.reticent.eevee.exc.DataRepositoryException;
-import io.reticent.eevee.model.Reminder;
+import io.reticent.eevee.repository.model.Reminder;
 import io.reticent.eevee.session.Session;
 import lombok.Getter;
+import lombok.Synchronized;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.File;
@@ -17,7 +18,7 @@ import java.util.List;
 public class ReminderDataRepository extends DataRepository {
     @JsonProperty
     @Getter
-    private List<Reminder> reminders;
+    private final List<Reminder> reminders;
 
     private ReminderDataRepository() {
         super();
@@ -37,12 +38,12 @@ public class ReminderDataRepository extends DataRepository {
         return Session.getObjectMapper().readValue(dataRepositoryFile, ReminderDataRepository.class);
     }
 
-    public void add(Reminder reminder) throws DataRepositoryException {
+    public synchronized void add(Reminder reminder) throws DataRepositoryException {
         reminders.add(reminder);
         commitAndFlush(GlobalConfiguration.REMINDER_DATA_REPOSITORY_PATH);
     }
 
-    public void remove(Reminder reminder) throws DataRepositoryException {
+    public synchronized void remove(Reminder reminder) throws DataRepositoryException {
         reminders.remove(reminder);
         commitAndFlush(GlobalConfiguration.REMINDER_DATA_REPOSITORY_PATH);
     }

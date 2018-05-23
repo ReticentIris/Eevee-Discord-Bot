@@ -33,10 +33,8 @@ public class Tokenizer {
         for (; currentIndex < str.length; currentIndex++) {
             if (!escape && str[currentIndex] == DOUBLE_QUOTE && !single_quote) {
                 double_quote = !double_quote;
-                token.append(str[currentIndex]);
             } else if (!escape && str[currentIndex] == SINGLE_QUOTE && !double_quote) {
                 single_quote = !single_quote;
-                token.append(str[currentIndex]);
             } else if (!escape && !double_quote && !single_quote && isWhitespace(str[currentIndex])) {
                 if (token.length() != 0) {
                     break;
