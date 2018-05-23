@@ -2,7 +2,7 @@ package io.reticent.eevee.session;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reticent.eevee.configuration.Configuration;
-import io.reticent.eevee.repository.HSReleaseAnnouncementDataRepository;
+import io.reticent.eevee.repository.HSReleaceAnnouncerDataRepository;
 import io.reticent.eevee.repository.ReminderDataRepository;
 import lombok.Getter;
 import lombok.NonNull;
@@ -25,7 +25,7 @@ public class Session {
     @Getter
     @Setter
     @NonNull
-    private static HSReleaseAnnouncementDataRepository hsReleaseAnnouncementDataRepository;
+    private static HSReleaceAnnouncerDataRepository hsReleaceAnnouncerDataRepository;
     @Getter
     @Setter
     @NonNull

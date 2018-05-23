@@ -28,6 +28,9 @@ dependencies {
     compile 'com.google.guava:guava:25.0-jre'
     compile 'com.google.cloud:google-cloud-translate:1.28.0'
     compile group: 'com.google.http-client', name: 'google-http-client-jackson2', version: '1.17.0-rc'
+
+    compile group: 'org.mongodb', name: 'mongodb-driver-async', version: '3.7.0'
+    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.7.0'
 }
 
 lombok {

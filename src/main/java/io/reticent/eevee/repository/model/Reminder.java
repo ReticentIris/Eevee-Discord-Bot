@@ -1,26 +1,22 @@
 package io.reticent.eevee.repository.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
+import org.bson.types.ObjectId;
 
 import java.time.Instant;
 
 @Builder
-@Value
-@JsonDeserialize(builder = Reminder.ReminderBuilder.class)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reminder {
-    @JsonProperty
+    private ObjectId id;
+    @NonNull
     private String userTag;
-    @JsonProperty
+    @NonNull
     private String userId;
-    @JsonProperty
+    @NonNull
     private String reminder;
-    @JsonProperty
+    @NonNull
     private Instant remindAt;
-
-    @JsonPOJOBuilder(withPrefix = "")
-    public static final class ReminderBuilder {}
 }

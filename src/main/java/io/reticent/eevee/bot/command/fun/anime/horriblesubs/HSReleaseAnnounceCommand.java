@@ -2,11 +2,10 @@ package io.reticent.eevee.bot.command.fun.anime.horriblesubs;
 
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
-import io.reticent.eevee.exc.DataRepositoryException;
 import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.provider.UUIDProvider;
-import io.reticent.eevee.repository.model.HSReleaseAnnouncement;
+import io.reticent.eevee.repository.model.HSReleaseAnnouncer;
 import io.reticent.eevee.rss.HorribleSubsReleaseReader;
 import io.reticent.eevee.rss.model.HorribleSubsReleaseItem;
 import io.reticent.eevee.session.Session;
@@ -71,39 +70,25 @@ public class HSReleaseAnnounceCommand extends Command {
     public void invoke(MessageReceivedEvent event, CommandArguments arguments) throws InvalidConfigurationException {
         HSReleaseAnnounceCommandArguments args = (HSReleaseAnnounceCommandArguments) arguments;
 
-        HSReleaseAnnouncement hsReleaseAnnouncement = HSReleaseAnnouncement.builder()
-                                                                           .anime(args.getAnimeName())
-                                                                           .quality(args.getQuality())
-                                                                           .channelId(event.getTextChannel().getId())
-                                                                           .lastEpisode(-1)
-                                                                           .announcementId(UUIDProvider.genUUID4())
-                                                                           .build();
+        HSReleaseAnnouncer hsReleaseAnnouncer = HSReleaseAnnouncer.builder()
+                                                                  .anime(args.getAnimeName())
+                                                                  .quality(args.getQuality())
+                                                                  .channelId(event.getTextChannel().getId())
+                                                                  .lastEpisode(-1)
+                                                                  .announcerId(UUIDProvider.genUUID4())
+                                                                  .build();
 
         synchronized (mutex) {
-            try {
-                Session.getHsReleaseAnnouncementDataRepository().add(hsReleaseAnnouncement);
+            Session.getHsReleaceAnnouncerDataRepository().add(hsReleaseAnnouncer);
 
-                EmbedBuilder embedBuilder = new EmbedBuilder();
-                embedBuilder.setTitle("HorribleSubs Release Announcer Added");
-                embedBuilder.setColor(Session.getConfiguration().readInt("successEmbedColorDecimal"));
-                embedBuilder.setDescription(
-                    String.format("Okay. I will announce when %s is released in %s", args.getAnimeName(), args.getQuality())
-                );
+            EmbedBuilder embedBuilder = new EmbedBuilder();
+            embedBuilder.setTitle("HorribleSubs Release Announcer Added");
+            embedBuilder.setColor(Session.getConfiguration().readInt("successEmbedColorDecimal"));
+            embedBuilder.setDescription(
+                String.format("Okay. I will announce when %s is released in %s.", args.getAnimeName(), args.getQuality())
+            );
 
-                event.getTextChannel().sendMessage(embedBuilder.build()).queue();
-            } catch (DataRepositoryException e) {
-                e.printStackTrace();
-                log.error("Failed to write new announcement to datastore.", e);
-
-                EmbedBuilder embedBuilder = new EmbedBuilder();
-                embedBuilder.setTitle("Oops! An error occurred.");
-                embedBuilder.setColor(Session.getConfiguration().readInt("errorEmbedColorDecimal"));
-                embedBuilder.setDescription(
-                    "Failed to persist announcer. Announcements may still be made however they will stop once the bot restarts."
-                );
-
-                event.getTextChannel().sendMessage(embedBuilder.build()).queue();
-            }
+            event.getTextChannel().sendMessage(embedBuilder.build()).queue();
         }
     }
 
@@ -137,15 +122,15 @@ public class HSReleaseAnnounceCommand extends Command {
                 log.debug(String.format("Found %s HS release items.", releases.size()));
 
                 synchronized (mutex) {
-                    List<HSReleaseAnnouncement> toNotifyList = Session.getHsReleaseAnnouncementDataRepository().getAnnouncements();
+                    List<HSReleaseAnnouncer> toNotifyList = Session.getHsReleaceAnnouncerDataRepository().getAnnouncers();
 
                     for (HorribleSubsReleaseItem release : releases) {
                         ReleaseData releaseData = ReleaseData.fromString(release.getTitle());
 
-                        List<HSReleaseAnnouncement> test = toNotifyList.stream()
-                                                                       .filter(a -> a.getAnime().equalsIgnoreCase(releaseData.getTitle()))
-                                                                       .filter(a -> a.getLastEpisode() < releaseData.getEpisode())
-                                                                       .filter(a -> a.getQuality().equalsIgnoreCase(releaseData.getQuality())).collect(Collectors.toList());
+                        List<HSReleaseAnnouncer> test = toNotifyList.stream()
+                                                                    .filter(a -> a.getAnime().equalsIgnoreCase(releaseData.getTitle()))
+                                                                    .filter(a -> a.getLastEpisode() < releaseData.getEpisode())
+                                                                    .filter(a -> a.getQuality().equalsIgnoreCase(releaseData.getQuality())).collect(Collectors.toList());
 
                         log.debug(String.format("Found %s matching announcers for release: %s", test.size(), releaseData));
 
@@ -166,20 +151,9 @@ public class HSReleaseAnnounceCommand extends Command {
 
                             log.debug(String.format("Issued announcement for new release to channel: %s.'", a.getChannelId()));
 
-                            try {
-                                Session.getHsReleaseAnnouncementDataRepository().remove(a);
-                                HSReleaseAnnouncement updatedAnnouncement = HSReleaseAnnouncement.builder()
-                                                                                                 .anime(a.getAnime())
-                                                                                                 .channelId(a.getChannelId())
-                                                                                                 .announcementId(a.getAnnouncementId())
-                                                                                                 .lastEpisode(releaseData.getEpisode())
-                                                                                                 .quality(a.getQuality())
-                                                                                                 .build();
-                                Session.getHsReleaseAnnouncementDataRepository().add(updatedAnnouncement);
-                            } catch (DataRepositoryException e) {
-                                e.printStackTrace();
-                                log.error("Failed to update HS announcement data repository. Announcement may be sent again", e);
-                            }
+                            a.setLastEpisode(releaseData.getEpisode());
+
+                            Session.getHsReleaceAnnouncerDataRepository().update(a);
                         });
                     }
                 }

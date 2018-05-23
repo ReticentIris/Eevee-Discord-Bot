@@ -120,13 +120,8 @@ public class RemindCommand extends Command {
 
         log.info("Adding new reminder to reminder datastore.");
 
-        try {
-            Session.getReminderDataRepository().add(reminder);
-            log.info("Successfully added new reminder to reminder datastore.");
-        } catch (DataRepositoryException e) {
-            e.printStackTrace();
-            log.error("Failed to add reminder to reminder datastore. Reminder will not live through bot restart.", e);
-        }
+        Session.getReminderDataRepository().add(reminder);
+        log.info("Successfully added new reminder to reminder datastore.");
 
         spawnReminderThread(reminder);
 
@@ -160,12 +155,7 @@ public class RemindCommand extends Command {
                 Session.getJdaClient().getUserById(reminder.getUserId()).openPrivateChannel().queue((channel) -> {
                     issueReminder(reminder.getReminder(), channel);
 
-                    try {
-                        Session.getReminderDataRepository().remove(reminder);
-                    } catch (DataRepositoryException e) {
-                        e.printStackTrace();
-                        log.error("Failed to remove reminder from reminder datastore. Reminder may be issued again by mistake.", e);
-                    }
+                    Session.getReminderDataRepository().remove(reminder);
 
                     log.debug(String.format(
                         "Issued reminder to %s. Reminder thread will die", reminder.getUserTag()
