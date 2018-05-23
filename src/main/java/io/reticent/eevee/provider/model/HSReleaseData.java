@@ -1,9 +1,7 @@
 package io.reticent.eevee.provider.model;
 
 import io.reticent.eevee.session.Session;
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.Value;
+import lombok.*;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.Optional;
@@ -11,35 +9,44 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Builder
-@Value
 @Log4j2
 public class HSReleaseData {
     private static final Pattern DETAIL_EXTRACTION_PATTERN = Pattern.compile(Session.getConfiguration().readString("animeReleaseDetailExtractionRegex"));
+    private static Matcher detailMatcher = null;
 
+    @Getter
     @NonNull
     private String subber;
+    @Getter
     @NonNull
     private String title;
+    @Getter
     private int episode;
+    @Getter
     @NonNull
     private String quality;
+    @Getter
     @NonNull
     private String format;
 
     public static Optional<HSReleaseData> fromString(String str) {
-        Matcher matcher = DETAIL_EXTRACTION_PATTERN.matcher(str);
+        if (detailMatcher == null) {
+            detailMatcher = DETAIL_EXTRACTION_PATTERN.matcher(str);
+        }
 
-        if (!matcher.matches()) {
+        detailMatcher.reset(str);
+
+        if (!detailMatcher.matches()) {
             log.error(String.format("No match found for string: %s.", str));
             return Optional.empty();
         }
 
         return Optional.of(HSReleaseData.builder()
-                                        .subber(matcher.group(1))
-                                        .title(matcher.group(2))
-                                        .episode(Integer.parseInt(matcher.group(3)))
-                                        .quality(matcher.group(6))
-                                        .format(matcher.group(10).toUpperCase())
+                                        .subber(detailMatcher.group(1))
+                                        .title(detailMatcher.group(2))
+                                        .episode(Integer.parseInt(detailMatcher.group(3)))
+                                        .quality(detailMatcher.group(6))
+                                        .format(detailMatcher.group(10).toUpperCase())
                                         .build());
     }
 
