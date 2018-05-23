@@ -5,7 +5,7 @@ import io.reticent.eevee.bot.EeveeBot;
 import io.reticent.eevee.configuration.GlobalConfiguration;
 import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.configuration.Configuration;
-import io.reticent.eevee.repository.HSReleaceAnnouncerDataRepository;
+import io.reticent.eevee.repository.HSReleaseAnnouncerDataRepository;
 import io.reticent.eevee.repository.ReminderDataRepository;
 import io.reticent.eevee.session.Session;
 import lombok.extern.log4j.Log4j2;
@@ -31,7 +31,7 @@ public class Eevee {
         Session.setObjectMapper(mapper);
 
         Session.setReminderDataRepository(ReminderDataRepository.getInstance());
-        Session.setHsReleaceAnnouncerDataRepository(HSReleaceAnnouncerDataRepository.getInstance());
+        Session.setHsReleaseAnnouncerDataRepository(HSReleaseAnnouncerDataRepository.getInstance());
 
         try {
             log.info(String.format("Using bot token: %s.", configuration.readString("botToken")));

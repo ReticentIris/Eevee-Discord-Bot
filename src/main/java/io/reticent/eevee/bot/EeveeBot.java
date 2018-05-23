@@ -1,7 +1,7 @@
 package io.reticent.eevee.bot;
 
 import io.reticent.eevee.bot.command.Command;
-import io.reticent.eevee.bot.command.fun.anime.horriblesubs.HSReleaseAnnounceCommand;
+import io.reticent.eevee.bot.command.fun.anime.horriblesubs.HSReleaseSubscribeCommand;
 import io.reticent.eevee.bot.command.fun.pokemon.BestPokemonCommand;
 import io.reticent.eevee.bot.command.util.avatar.AvatarCommand;
 import io.reticent.eevee.bot.command.util.help.HelpCommand;
@@ -42,7 +42,7 @@ public class EeveeBot extends ListenerAdapter {
         commandMapper.add(new BestPokemonCommand());
         commandMapper.add(new RemindCommand());
         commandMapper.add(new F12Command());
-        commandMapper.add(new HSReleaseAnnounceCommand());
+        commandMapper.add(new HSReleaseSubscribeCommand());
 
         log.info(String.format("Registered %s commands.", commandMapper.getBotCommands().size()));
     }
