@@ -49,6 +49,8 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
-      - run: docker build --tag registry.reticent.io/eevee .
-      - run: sudo docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_HOST
-      - run: docker push registry.reticent.io/eevee
+      - run:
+          command: |
+              docker build --tag registry.reticent.io/eevee .
+              docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_HOST
+              docker push registry.reticent.io/eevee
