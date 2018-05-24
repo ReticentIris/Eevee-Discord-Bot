@@ -90,6 +90,7 @@ public class HelpCommand extends Command {
                 embedBuilder.setDescription(command.getDescription());
                 embedBuilder.addField("Usage", String.format("```%s```", command.getArguments().toString()), false);
                 embedBuilder.addField("Requires Bot Owner", Formatter.formatBoolean(command.requiresBotOwner()), true);
+                embedBuilder.addField("Required Permissions", Formatter.formatPermissions(command.getRequiredPermissions()), true);
                 embedBuilder.addField("Rate Limit", Formatter.formatRateLimit(command.getRateLimiter()), true);
                 embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
 
