@@ -1,11 +1,8 @@
 package io.reticent.eevee.bot.command;
 
-import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.parser.arguments.Arguments;
 import io.reticent.eevee.util.RateLimiter;
-import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
