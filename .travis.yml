@@ -1,0 +1,8 @@
+language: java
+jdk: oraclejdk8
+script:
+- gradle jar
+- gradle copyToLib
+- echo "$DOCKER_PASSWORD" | docker login $DOCKER_HOST -u "$DOCKER_USERNAME" --password-stdin
+- docker build --tag registry.reticent.io/eevee .
+- docker push $DOCKER_HOST/eevee
