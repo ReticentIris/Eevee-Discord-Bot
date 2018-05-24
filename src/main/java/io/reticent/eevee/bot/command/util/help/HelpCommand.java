@@ -60,7 +60,7 @@ public class HelpCommand extends Command {
 
             embedBuilder.setTitle("Eevee Help Directory");
             embedBuilder.setDescription(String.format(
-                "Type one of the commands below to see more detailed help information.\n" +
+                "Type one of the commands below to see help information for a command.\n" +
                 "The bot prefix is `%s`.",
                 Session.getConfiguration().readString("botPrefix")
             ));
