@@ -20,7 +20,6 @@ import java.util.Optional;
 
 @Log4j2
 public class HorribleSubsReleaseReader {
-
     public Optional<List<HorribleSubsReleaseItem>> readFeed() {
         List<HorribleSubsReleaseItem> releases = new LinkedList<>();
 
