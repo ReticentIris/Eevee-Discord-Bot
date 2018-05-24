@@ -44,6 +44,7 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
         
       - run: gradle jar
+      - run: gradle copyToLib
 
       - setup_remote_docker:
           docker_layer_caching: true
