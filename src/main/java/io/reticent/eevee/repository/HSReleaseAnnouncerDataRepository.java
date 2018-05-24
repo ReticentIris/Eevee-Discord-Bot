@@ -55,4 +55,8 @@ public class HSReleaseAnnouncerDataRepository extends DataRepository {
     public void remove(String announcerId) {
         MONGO_COLLECTION.deleteOne(eq("announcerId", announcerId));
     }
+
+    public void remove(HSReleaseAnnouncer announcer) {
+        MONGO_COLLECTION.deleteOne(eq("announcerId", announcer.getAnnouncerId()));
+    }
 }

@@ -6,5 +6,7 @@ import lombok.Getter;
 
 public class HSReleaseUnsubscribeCommandArguments extends CommandArguments {
     @Getter
-    private String subscriptionId;
+    private String animeName;
+    @Getter
+    private String quality;
 }

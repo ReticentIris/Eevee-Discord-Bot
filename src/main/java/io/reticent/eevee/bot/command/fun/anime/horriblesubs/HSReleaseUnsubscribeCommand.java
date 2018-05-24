@@ -33,7 +33,7 @@ public class HSReleaseUnsubscribeCommand extends Command {
 
     @Override
     public Permission[] getRequiredPermissions() {
-        return new Permission[] {
+        return new Permission[]{
             Permission.MANAGE_CHANNEL
         };
     }
@@ -43,28 +43,34 @@ public class HSReleaseUnsubscribeCommand extends Command {
         return new Arguments<>(new Argument[]{
             new LiteralArgument("hs"),
             new LiteralArgument("unsubscribe"),
-            new StringArgument("subscriptionId")
+            new StringArgument("animeName"),
+            new StringArgument("quality")
         }, HSReleaseUnsubscribeCommandArguments.class);
     }
 
     @Override
     public void invoke(MessageReceivedEvent event, CommandArguments arguments) {
         HSReleaseUnsubscribeCommandArguments args = (HSReleaseUnsubscribeCommandArguments) arguments;
-        Optional<HSReleaseAnnouncer> announcerOptional = Session.getHsReleaseAnnouncerDataRepository().getAnnouncer(args.getSubscriptionId());
+        Optional<HSReleaseAnnouncer> announcerOptional = Session.getHsReleaseAnnouncerDataRepository()
+                                                                .getAnnouncers()
+                                                                .stream()
+                                                                .filter(announcer -> announcer.getChannelId().equals(event.getChannel().getId()))
+                                                                .filter(announcer -> announcer.getAnime().equalsIgnoreCase(args.getAnimeName()))
+                                                                .filter(announcer -> announcer.getQuality().equalsIgnoreCase(args.getQuality()))
+                                                                .findFirst();
 
         EmbedBuilder embedBuilder = new EmbedBuilder();
 
         if (!announcerOptional.isPresent()) {
             embedBuilder.setTitle("Oops! An error occurred.");
-            embedBuilder.setDescription("The requested subscription ID does not exist.");
+            embedBuilder.setDescription("The requested subscription does not exist.");
             embedBuilder.setColor(Session.getConfiguration().readInt("errorEmbedColorDecimal"));
             event.getChannel().sendMessage(embedBuilder.build()).queue();
             return;
         }
 
         HSReleaseAnnouncer announcer = announcerOptional.get();
-
-        Session.getHsReleaseAnnouncerDataRepository().remove(args.getSubscriptionId());
+        Session.getHsReleaseAnnouncerDataRepository().remove(announcer);
 
         embedBuilder.setTitle("HorribleSubs Release Subscription Cancelled");
         embedBuilder.setColor(Session.getConfiguration().readInt("successEmbedColorDecimal"));
