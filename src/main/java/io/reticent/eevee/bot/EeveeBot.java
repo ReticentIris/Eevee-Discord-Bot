@@ -44,8 +44,8 @@ public class EeveeBot extends ListenerAdapter {
         commandMapper.add(new BestPokemonCommand());
         commandMapper.add(new RemindCommand());
         commandMapper.add(new F12Command());
-        commandMapper.add(new HSReleaseSubscribeCommand());
         commandMapper.add(new HSReleaseListCommand());
+        commandMapper.add(new HSReleaseSubscribeCommand());
         commandMapper.add(new HSReleaseUnsubscribeCommand());
 
         log.info(String.format("Registered %s commands.", commandMapper.getBotCommands().size()));
