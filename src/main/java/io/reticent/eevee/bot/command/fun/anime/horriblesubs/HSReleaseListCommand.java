@@ -6,6 +6,7 @@ import io.reticent.eevee.parser.arguments.Argument;
 import io.reticent.eevee.parser.arguments.Arguments;
 import io.reticent.eevee.parser.arguments.LiteralArgument;
 import io.reticent.eevee.session.Session;
+import lombok.NonNull;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -34,7 +35,7 @@ public class HSReleaseListCommand extends Command {
     }
 
     @Override
-    public void invoke(MessageReceivedEvent event, CommandArguments arguments) {
+    public void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle("HorribleSubs Release Subscriptions");
 

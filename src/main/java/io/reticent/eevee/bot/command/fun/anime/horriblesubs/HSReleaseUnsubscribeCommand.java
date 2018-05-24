@@ -8,6 +8,7 @@ import io.reticent.eevee.parser.arguments.LiteralArgument;
 import io.reticent.eevee.parser.arguments.StringArgument;
 import io.reticent.eevee.repository.model.HSReleaseAnnouncer;
 import io.reticent.eevee.session.Session;
+import lombok.NonNull;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -49,7 +50,7 @@ public class HSReleaseUnsubscribeCommand extends Command {
     }
 
     @Override
-    public void invoke(MessageReceivedEvent event, CommandArguments arguments) {
+    public void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) {
         HSReleaseUnsubscribeCommandArguments args = (HSReleaseUnsubscribeCommandArguments) arguments;
         Optional<HSReleaseAnnouncer> announcerOptional = Session.getHsReleaseAnnouncerDataRepository()
                                                                 .getAnnouncers()

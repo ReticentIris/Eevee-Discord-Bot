@@ -67,7 +67,7 @@ public class HelpCommand extends Command {
             embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
 
             commands.forEach(command -> {
-                embedBuilder.addField(command.getLabel(), String.format("help %s", command.getShortLabel()), true);
+                embedBuilder.addField(command.getLabel(), String.format("help %s", command.getShortLabel()), false);
             });
 
             event.getChannel().sendMessage(embedBuilder.build()).queue();

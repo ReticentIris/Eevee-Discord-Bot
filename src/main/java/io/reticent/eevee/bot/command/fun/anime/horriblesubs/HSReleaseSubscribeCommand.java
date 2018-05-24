@@ -8,6 +8,7 @@ import io.reticent.eevee.provider.UUIDProvider;
 import io.reticent.eevee.repository.model.HSReleaseAnnouncer;
 import io.reticent.eevee.service.HSReleaseAnnouncerService;
 import io.reticent.eevee.session.Session;
+import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
@@ -55,7 +56,7 @@ public class HSReleaseSubscribeCommand extends Command {
     }
 
     @Override
-    public void invoke(MessageReceivedEvent event, CommandArguments arguments) throws InvalidConfigurationException {
+    public void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) {
         HSReleaseSubscribeCommandArguments args = (HSReleaseSubscribeCommandArguments) arguments;
 
         HSReleaseAnnouncer hsReleaseAnnouncer = HSReleaseAnnouncer.builder()
@@ -63,7 +64,7 @@ public class HSReleaseSubscribeCommand extends Command {
                                                                   .quality(args.getQuality())
                                                                   .channelId(event.getChannel().getId())
                                                                   .lastEpisode(-1)
-                                                                  .announcerId(UUIDProvider.genUUID4())
+                                                                  .announcerId(UUIDProvider.getUUID4())
                                                                   .build();
 
         Session.getHsReleaseAnnouncerDataRepository().add(hsReleaseAnnouncer);
