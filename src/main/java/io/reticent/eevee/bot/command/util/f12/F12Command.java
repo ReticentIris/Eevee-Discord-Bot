@@ -76,7 +76,7 @@ public class F12Command extends Command {
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.setTitle("Interactive Shell");
             embedBuilder.setDescription("_Exited interactive shell._");
-            embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+            embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
             event.getChannel().sendMessage(embedBuilder.build()).queue();
 
@@ -89,8 +89,7 @@ public class F12Command extends Command {
         } else {
             log.info(String.format("Could not find existing engine session for user %s. Creating new engine.", userId));
             jsEngine = ENGINE_MANAGER.getEngineByName("nashorn");
-            jsEngine.put("jda", Session.getJdaClient());
-            jsEngine.put("config", Session.getConfiguration());
+            jsEngine.put("session", Session.getSession());
 
             ENGINE_SESSIONS.put(event.getAuthor().getId(), jsEngine);
         }
@@ -103,14 +102,14 @@ public class F12Command extends Command {
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.setTitle("Interactive Shell");
             embedBuilder.setDescription(result == null ? "_No Output_" : result.toString());
-            embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+            embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
             event.getChannel().sendMessage(embedBuilder.build()).queue();
         } catch (ScriptException e) {
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.setTitle("Interactive Shell");
             embedBuilder.setDescription(e.getMessage());
-            embedBuilder.setColor(Session.getConfiguration().readInt("errorEmbedColorDecimal"));
+            embedBuilder.setColor(Session.getSession().getConfiguration().readInt("errorEmbedColorDecimal"));
 
             event.getChannel().sendMessage(embedBuilder.build()).queue();
         }

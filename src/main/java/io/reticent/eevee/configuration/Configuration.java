@@ -82,7 +82,7 @@ public class Configuration {
         }
 
         try {
-            ObjectMapper objectMapper = Session.getObjectMapper();
+            ObjectMapper objectMapper = Session.getSession().getObjectMapper();
             TypeReference<HashMap<String, Object>> genericTypeReference = new TypeReference<HashMap<String, Object>>() {
             };
             data = objectMapper.<HashMap<String, Object>>readValue(file, genericTypeReference);

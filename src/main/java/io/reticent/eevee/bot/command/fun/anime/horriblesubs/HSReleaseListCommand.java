@@ -39,7 +39,8 @@ public class HSReleaseListCommand extends Command {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle("HorribleSubs Release Subscriptions");
 
-        Session.getHsReleaseAnnouncerDataRepository()
+        Session.getSession()
+               .getHsReleaseAnnouncerDataRepository()
                .getAnnouncers()
                .stream()
                .filter(announcer -> announcer.getChannelId().equals(event.getChannel().getId()))
@@ -51,7 +52,7 @@ public class HSReleaseListCommand extends Command {
                    );
                });
 
-        embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+        embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
         event.getChannel().sendMessage(embedBuilder.build()).queue();
     }

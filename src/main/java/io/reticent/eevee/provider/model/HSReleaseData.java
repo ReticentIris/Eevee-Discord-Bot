@@ -11,7 +11,11 @@ import java.util.regex.Pattern;
 @Builder
 @Log4j2
 public class HSReleaseData {
-    private static final Pattern DETAIL_EXTRACTION_PATTERN = Pattern.compile(Session.getConfiguration().readString("animeReleaseDetailExtractionRegex"));
+    private static final Pattern DETAIL_EXTRACTION_PATTERN = Pattern.compile(
+        Session.getSession()
+               .getConfiguration()
+               .readString("animeReleaseDetailExtractionRegex")
+    );
     private static Matcher detailMatcher = null;
 
     @Getter

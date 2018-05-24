@@ -18,8 +18,8 @@ public class ReminderDataRepository extends DataRepository {
     private static ReminderDataRepository reminderDataRepository;
     private final MongoCollection<Reminder> MONGO_COLLECTION;
 
-    private final String DATABASE_NAME = Session.getConfiguration().readString("mongoDatabaseName");
-    private final String COLLECTION_NAME = Session.getConfiguration().readString("mongoReminderCollectionName");
+    private final String DATABASE_NAME = Session.getSession().getConfiguration().readString("mongoDatabaseName");
+    private final String COLLECTION_NAME = Session.getSession().getConfiguration().readString("mongoReminderCollectionName");
 
     private ReminderDataRepository() {
         super();

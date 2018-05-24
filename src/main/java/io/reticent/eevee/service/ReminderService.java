@@ -41,10 +41,10 @@ public class ReminderService implements Service {
                     log.error("Failed to sleep reminder thread.", e);
                 }
 
-                Session.getJdaClient().getUserById(reminder.getUserId()).openPrivateChannel().queue((channel) -> {
+                Session.getSession().getJdaClient().getUserById(reminder.getUserId()).openPrivateChannel().queue((channel) -> {
                     issueReminder(reminder.getReminder(), channel);
 
-                    Session.getReminderDataRepository().remove(reminder);
+                    Session.getSession().getReminderDataRepository().remove(reminder);
 
                     log.debug(String.format(
                         "Issued reminder to %s. Reminder thread will die", reminder.getUserTag()
@@ -63,7 +63,7 @@ public class ReminderService implements Service {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle("Reminder");
         embedBuilder.setDescription(reminder);
-        embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+        embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
         channel.sendMessage(embedBuilder.build()).queue();
     }

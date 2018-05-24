@@ -52,7 +52,8 @@ public class HSReleaseUnsubscribeCommand extends Command {
     @Override
     public void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) {
         HSReleaseUnsubscribeCommandArguments args = (HSReleaseUnsubscribeCommandArguments) arguments;
-        Optional<HSReleaseAnnouncer> announcerOptional = Session.getHsReleaseAnnouncerDataRepository()
+        Optional<HSReleaseAnnouncer> announcerOptional = Session.getSession()
+                                                                .getHsReleaseAnnouncerDataRepository()
                                                                 .getAnnouncers()
                                                                 .stream()
                                                                 .filter(announcer -> announcer.getChannelId().equals(event.getChannel().getId()))
@@ -65,16 +66,16 @@ public class HSReleaseUnsubscribeCommand extends Command {
         if (!announcerOptional.isPresent()) {
             embedBuilder.setTitle("Oops! An error occurred.");
             embedBuilder.setDescription("The requested subscription does not exist.");
-            embedBuilder.setColor(Session.getConfiguration().readInt("errorEmbedColorDecimal"));
+            embedBuilder.setColor(Session.getSession().getConfiguration().readInt("errorEmbedColorDecimal"));
             event.getChannel().sendMessage(embedBuilder.build()).queue();
             return;
         }
 
         HSReleaseAnnouncer announcer = announcerOptional.get();
-        Session.getHsReleaseAnnouncerDataRepository().remove(announcer);
+        Session.getSession().getHsReleaseAnnouncerDataRepository().remove(announcer);
 
         embedBuilder.setTitle("HorribleSubs Release Subscription Cancelled");
-        embedBuilder.setColor(Session.getConfiguration().readInt("successEmbedColorDecimal"));
+        embedBuilder.setColor(Session.getSession().getConfiguration().readInt("successEmbedColorDecimal"));
         embedBuilder.setDescription(
             String.format("Okay. This channel will no longer receive announcements when *%s* is released in %s.", announcer.getAnime(), announcer.getQuality())
         );

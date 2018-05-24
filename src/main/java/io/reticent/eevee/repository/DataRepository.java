@@ -15,7 +15,7 @@ public abstract class DataRepository {
     }
 
     void commitAndFlush(String path) throws DataRepositoryException {
-        ObjectMapper objectMapper = Session.getObjectMapper();
+        ObjectMapper objectMapper = Session.getSession().getObjectMapper();
 
         try {
             objectMapper.writeValue(new File(path), this);

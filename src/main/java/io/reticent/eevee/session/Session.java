@@ -4,30 +4,30 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reticent.eevee.configuration.Configuration;
 import io.reticent.eevee.repository.HSReleaseAnnouncerDataRepository;
 import io.reticent.eevee.repository.ReminderDataRepository;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import net.dv8tion.jda.core.JDA;
 
+@NoArgsConstructor
+@Data
 public class Session {
-    @Getter
-    @Setter
     @NonNull
-    private static Configuration configuration;
-    @Getter
-    @Setter
+    private Configuration configuration;
     @NonNull
-    private static JDA jdaClient;
-    @Getter
-    @Setter
+    private JDA jdaClient;
     @NonNull
-    private static ReminderDataRepository reminderDataRepository;
-    @Getter
-    @Setter
+    private ReminderDataRepository reminderDataRepository;
     @NonNull
-    private static HSReleaseAnnouncerDataRepository hsReleaseAnnouncerDataRepository;
-    @Getter
-    @Setter
+    private HSReleaseAnnouncerDataRepository hsReleaseAnnouncerDataRepository;
     @NonNull
-    private static ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
+
+    private static Session session;
+
+    public static Session getSession() {
+        if (session == null) {
+            session = new Session();
+        }
+
+        return session;
+    }
 }

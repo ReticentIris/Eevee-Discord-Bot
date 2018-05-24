@@ -62,9 +62,9 @@ public class HelpCommand extends Command {
             embedBuilder.setDescription(String.format(
                 "Type one of the commands below to see help information for a command.\n" +
                     "The bot prefix is `%s`.",
-                Session.getConfiguration().readString("botPrefix")
+                Session.getSession().getConfiguration().readString("botPrefix")
             ));
-            embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+            embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
             commands.forEach(command -> {
                 embedBuilder.addField(command.getLabel(), String.format("help %s", command.getShortLabel()), false);
@@ -80,7 +80,7 @@ public class HelpCommand extends Command {
             if (!commandOptional.isPresent()) {
                 embedBuilder.setTitle("Oops! An error occurred.");
                 embedBuilder.setDescription("Invalid command specified.");
-                embedBuilder.setColor(Session.getConfiguration().readInt("errorEmbedColorDecimal"));
+                embedBuilder.setColor(Session.getSession().getConfiguration().readInt("errorEmbedColorDecimal"));
 
                 event.getChannel().sendMessage(embedBuilder.build()).queue();
             } else {
@@ -92,7 +92,7 @@ public class HelpCommand extends Command {
                 embedBuilder.addField("Requires Bot Owner", Formatter.formatBoolean(command.requiresBotOwner()), true);
                 embedBuilder.addField("Required Permissions", Formatter.formatPermissions(command.getRequiredPermissions()), true);
                 embedBuilder.addField("Rate Limit", Formatter.formatRateLimit(command.getRateLimiter()), true);
-                embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+                embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
                 event.getChannel().sendMessage(embedBuilder.build()).queue();
             }

@@ -39,7 +39,7 @@ public class BestPokemonCommand extends Command {
 
     @Override
     public void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) {
-        List<String> eevees = Session.getConfiguration().readStringList("eevees");
+        List<String> eevees = Session.getSession().getConfiguration().readStringList("eevees");
 
         Random random = new Random();
         int index = random.nextInt(eevees.size());
@@ -47,7 +47,7 @@ public class BestPokemonCommand extends Command {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle("It's Eevee!");
         embedBuilder.setImage(eevees.get(index));
-        embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+        embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
         event.getChannel().sendMessage(embedBuilder.build()).queue();
     }

@@ -56,7 +56,7 @@ public class AvatarCommand extends Command {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle(String.format("User Avatar for %s", userName));
         embedBuilder.setImage(avatarUrl);
-        embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+        embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
         event.getChannel().sendMessage(embedBuilder.build()).queue();
     }

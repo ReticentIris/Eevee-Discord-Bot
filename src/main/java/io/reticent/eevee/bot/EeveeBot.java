@@ -7,6 +7,7 @@ import io.reticent.eevee.bot.command.fun.anime.horriblesubs.HSReleaseUnsubscribe
 import io.reticent.eevee.bot.command.fun.pokemon.BestPokemonCommand;
 import io.reticent.eevee.bot.command.util.avatar.AvatarCommand;
 import io.reticent.eevee.bot.command.util.help.HelpCommand;
+import io.reticent.eevee.bot.command.util.jisho.JishoCommand;
 import io.reticent.eevee.bot.command.util.remind.RemindCommand;
 import io.reticent.eevee.bot.command.util.stats.StatsCommand;
 import io.reticent.eevee.bot.command.util.translate.TranslateCommand;
@@ -47,6 +48,7 @@ public class EeveeBot extends ListenerAdapter {
         commandMapper.add(new HSReleaseListCommand());
         commandMapper.add(new HSReleaseSubscribeCommand());
         commandMapper.add(new HSReleaseUnsubscribeCommand());
+        commandMapper.add(new JishoCommand());
 
         log.info(String.format("Registered %s commands.", commandMapper.getBotCommands().size()));
     }
@@ -54,7 +56,7 @@ public class EeveeBot extends ListenerAdapter {
     @Override
     public void onMessageReceived(@NonNull MessageReceivedEvent event) {
         String messageText = event.getMessage().getContentRaw().trim();
-        String botPrefix = Session.getConfiguration().readString("botPrefix");
+        String botPrefix = Session.getSession().getConfiguration().readString("botPrefix");
 
         if (!messageText.startsWith(botPrefix)) {
             return;
@@ -83,7 +85,7 @@ public class EeveeBot extends ListenerAdapter {
     }
 
     private boolean isBotOwner(@NonNull String id) {
-        return id.equals(Session.getConfiguration().readString("botOwnerId"));
+        return id.equals(Session.getSession().getConfiguration().readString("botOwnerId"));
     }
 
     private boolean canInvoke(@NonNull Command command, @NonNull MessageReceivedEvent event) {

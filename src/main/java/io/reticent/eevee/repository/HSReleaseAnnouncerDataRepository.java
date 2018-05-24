@@ -18,8 +18,8 @@ public class HSReleaseAnnouncerDataRepository extends DataRepository {
     private static HSReleaseAnnouncerDataRepository hsReleaseAnnouncerDataRepository;
     private final MongoCollection<HSReleaseAnnouncer> MONGO_COLLECTION;
 
-    private final String DATABASE_NAME = Session.getConfiguration().readString("mongoDatabaseName");
-    private final String COLLECTION_NAME = Session.getConfiguration().readString("mongoHSReleaseAnnouncerCollectionName");
+    private final String DATABASE_NAME = Session.getSession().getConfiguration().readString("mongoDatabaseName");
+    private final String COLLECTION_NAME = Session.getSession().getConfiguration().readString("mongoHSReleaseAnnouncerCollectionName");
 
     private HSReleaseAnnouncerDataRepository() {
         super();

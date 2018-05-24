@@ -67,11 +67,11 @@ public class HSReleaseSubscribeCommand extends Command {
                                                                   .announcerId(UUIDProvider.getUUID4())
                                                                   .build();
 
-        Session.getHsReleaseAnnouncerDataRepository().add(hsReleaseAnnouncer);
+        Session.getSession().getHsReleaseAnnouncerDataRepository().add(hsReleaseAnnouncer);
 
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle("HorribleSubs Release Subscription Added");
-        embedBuilder.setColor(Session.getConfiguration().readInt("successEmbedColorDecimal"));
+        embedBuilder.setColor(Session.getSession().getConfiguration().readInt("successEmbedColorDecimal"));
         embedBuilder.setDescription(
             String.format("Okay. I will announce when *%s* is released in %s.", args.getAnimeName(), args.getQuality())
         );

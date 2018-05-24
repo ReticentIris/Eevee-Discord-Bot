@@ -32,7 +32,7 @@ public class HSReleaseAnnouncerService implements Service {
                     checkOnce();
 
                     try {
-                        TimeUnit.MILLISECONDS.sleep(Session.getConfiguration().readInt("animeReleaseCheckDelay"));
+                        TimeUnit.MILLISECONDS.sleep(Session.getSession().getConfiguration().readInt("animeReleaseCheckDelay"));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                         log.error("Failed to sleep after checking for HS releases. Will try again.", e);
@@ -47,7 +47,7 @@ public class HSReleaseAnnouncerService implements Service {
     private void checkOnce() {
         log.debug("Checking for new HS release data.");
 
-        List<HSReleaseAnnouncer> toNotifyList = Session.getHsReleaseAnnouncerDataRepository().getAnnouncers();
+        List<HSReleaseAnnouncer> toNotifyList = Session.getSession().getHsReleaseAnnouncerDataRepository().getAnnouncers();
         Optional<List<HSReleaseData>> releaseDataOptional = HSReleaseDataProvider.getData();
 
         if (!releaseDataOptional.isPresent()) {
@@ -71,9 +71,10 @@ public class HSReleaseAnnouncerService implements Service {
                 embedBuilder.addField("Episode", releaseData.getEpisode() + "", true);
                 embedBuilder.addField("Quality", releaseData.getQuality(), true);
                 embedBuilder.addField("Format", releaseData.getFormat(), true);
-                embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+                embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
-                Session.getJdaClient()
+                Session.getSession()
+                       .getJdaClient()
                        .getTextChannelById(a.getChannelId())
                        .sendMessage(embedBuilder.build())
                        .queue();
@@ -82,7 +83,7 @@ public class HSReleaseAnnouncerService implements Service {
 
                 a.setLastEpisode(releaseData.getEpisode());
 
-                Session.getHsReleaseAnnouncerDataRepository().update(a);
+                Session.getSession().getHsReleaseAnnouncerDataRepository().update(a);
             });
         }
     }

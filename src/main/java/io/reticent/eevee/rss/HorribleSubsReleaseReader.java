@@ -1,5 +1,6 @@
 package io.reticent.eevee.rss;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.configuration.GlobalConfiguration;
 import io.reticent.eevee.util.NetUtil;
 import io.reticent.eevee.rss.model.HorribleSubsReleaseItem;
@@ -9,7 +10,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import javax.swing.text.html.Option;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -41,7 +41,7 @@ public class HorribleSubsReleaseReader {
                 );
             }
 
-            return Optional.of(releases);
+            return Optional.of(ImmutableList.copyOf(releases));
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
             log.error("Failed to create XML parser.", e);

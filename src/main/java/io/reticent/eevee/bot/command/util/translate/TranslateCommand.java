@@ -90,7 +90,7 @@ public class TranslateCommand extends Command {
             );
             embedBuilder.addField("Source:", sourceText, false);
             embedBuilder.addField("Translation:", translation.getTranslatedText(), false);
-            embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+            embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
             event.getChannel().sendMessage(embedBuilder.build()).queue();
         } catch (TranslateException e) {
@@ -99,7 +99,7 @@ public class TranslateCommand extends Command {
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.setTitle("Oops! An error occurred.");
             embedBuilder.appendDescription("Could not recognize target language code.");
-            embedBuilder.setColor(Session.getConfiguration().readInt("errorEmbedColorDecimal"));
+            embedBuilder.setColor(Session.getSession().getConfiguration().readInt("errorEmbedColorDecimal"));
 
             event.getChannel().sendMessage(embedBuilder.build()).queue();
         }

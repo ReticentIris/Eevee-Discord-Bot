@@ -15,11 +15,10 @@ import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 
 import javax.security.auth.login.LoginException;
-import java.io.IOException;
 
 @Log4j2
 public class Eevee {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Configuration configuration = Configuration.builder()
                                                    .filePath(GlobalConfiguration.CONFIGURATION_PATH)
                                                    .build();
@@ -27,11 +26,11 @@ public class Eevee {
         ObjectMapper mapper = new ObjectMapper();
         mapper.findAndRegisterModules();
 
-        Session.setConfiguration(configuration);
-        Session.setObjectMapper(mapper);
+        Session.getSession().setConfiguration(configuration);
+        Session.getSession().setObjectMapper(mapper);
 
-        Session.setReminderDataRepository(ReminderDataRepository.getInstance());
-        Session.setHsReleaseAnnouncerDataRepository(HSReleaseAnnouncerDataRepository.getInstance());
+        Session.getSession().setReminderDataRepository(ReminderDataRepository.getInstance());
+        Session.getSession().setHsReleaseAnnouncerDataRepository(HSReleaseAnnouncerDataRepository.getInstance());
 
         try {
             log.info(String.format("Using bot token: %s.", configuration.readString("botToken")));
@@ -42,7 +41,8 @@ public class Eevee {
                                                      .setGame(Game.playing("ev help"))
                                                      .addEventListener(bot)
                                                      .buildBlocking();
-            Session.setJdaClient(jda);
+
+            Session.getSession().setJdaClient(jda);
 
             bot.registerCommands();
         } catch (LoginException | InterruptedException | InvalidConfigurationException e) {

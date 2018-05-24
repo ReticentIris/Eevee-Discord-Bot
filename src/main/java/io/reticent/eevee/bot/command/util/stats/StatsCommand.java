@@ -51,7 +51,7 @@ public class StatsCommand extends Command {
         Duration uptime = Duration.between(startTime, now);
         String uptimeString = TimeUtil.durationToDDHHMMSS(uptime);
 
-        JDA jdaClient = Session.getJdaClient();
+        JDA jdaClient = Session.getSession().getJdaClient();
 
         int numberOfServers = jdaClient.getGuilds().size();
         int numberOfMembers = jdaClient.getGuilds().stream().map(g -> g.getMembers().size()).reduce(0, (a, b) -> a + b);
@@ -61,7 +61,7 @@ public class StatsCommand extends Command {
         embedBuilder.addField("Uptime", uptimeString, false);
         embedBuilder.addField("Guild Count", numberOfServers + "", false);
         embedBuilder.addField("Member Count", numberOfMembers + "", false);
-        embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+        embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
         event.getChannel().sendMessage(embedBuilder.build()).queue();
     }

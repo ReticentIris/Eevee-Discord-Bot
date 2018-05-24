@@ -25,7 +25,8 @@ import java.util.stream.Collectors;
 public class RemindCommand extends Command {
     @Override
     public void bootstrap() {
-        Session.getReminderDataRepository()
+        Session.getSession()
+               .getReminderDataRepository()
                .getReminders()
                .stream()
                .map(ReminderService::getInstance)
@@ -125,7 +126,7 @@ public class RemindCommand extends Command {
 
         log.info("Adding new reminder to reminder datastore.");
 
-        Session.getReminderDataRepository().add(reminder);
+        Session.getSession().getReminderDataRepository().add(reminder);
 
         log.info("Successfully added new reminder to reminder datastore.");
 
@@ -136,7 +137,7 @@ public class RemindCommand extends Command {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle("Okay. I will remind you to...");
         embedBuilder.setDescription(remindAction);
-        embedBuilder.setColor(Session.getConfiguration().readInt("defaultEmbedColorDecimal"));
+        embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
         event.getChannel().sendMessage(embedBuilder.build()).queue();
     }
