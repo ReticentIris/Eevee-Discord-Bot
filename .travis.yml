@@ -9,6 +9,6 @@ before_install:
 script:
   - gradle jar
   - gradle copyToLib
-  - echo "$DOCKER_PASSWORD" | docker login $DOCKER_HOST -u "$DOCKER_USERNAME" --password-stdin
-  - docker build --tag registry.reticent.io/eevee .
-  - docker push $DOCKER_HOST/eevee
+  - echo "$DOCKER_PASSWORD" | docker login $REGISTRY_HOST -u "$DOCKER_USERNAME" --password-stdin
+  - docker build --tag $REGISTRY_HOST/eevee .
+  - docker push $REGISTRY_HOST/eevee
