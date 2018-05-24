@@ -58,7 +58,7 @@ public class HelpCommand extends Command {
         if (args.getCommandShortName() == null) {
             List<Command> commands = commandMapper.getBotCommands();
 
-            embedBuilder.setTitle("Eevee Help");
+            embedBuilder.setTitle("Eevee Help Directory");
             embedBuilder.setDescription(String.format(
                 "Type one of the commands below to see more detailed help information.\n" +
                 "The bot prefix is `%s`.",
