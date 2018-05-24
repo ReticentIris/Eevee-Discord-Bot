@@ -3,6 +3,11 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2
+
+machine:
+  services:
+    - docker
+
 jobs:
   build:
     docker:
@@ -38,6 +43,10 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
         
-      # run tests!
       - run: gradle jar
-      
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - run: docker build --tag registry.reticent.io/eevee .
+      - run: docker push registry.reticent.io/eevee
