@@ -5,6 +5,7 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.User;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Formatter {
@@ -24,12 +25,12 @@ public class Formatter {
         return String.format("%s every %s seconds", rateLimiter.getMaxHits(), rateLimiter.getDuration() / 1000);
     }
 
-    public static String formatPermissions(Permission[] permissions) {
-        if (permissions.length == 0) {
+    public static String formatPermissions(List<Permission> permissions) {
+        if (permissions.isEmpty()) {
             return "None";
         }
         
-        return Arrays.stream(permissions).map(Permission::getName).collect(Collectors.joining(", "));
+        return permissions.stream().map(Permission::getName).collect(Collectors.joining(", "));
     }
 
     public static String formatTwitterUser(String user) {

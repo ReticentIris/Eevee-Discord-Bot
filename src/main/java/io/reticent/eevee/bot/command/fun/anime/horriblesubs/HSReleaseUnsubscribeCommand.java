@@ -3,7 +3,6 @@ package io.reticent.eevee.bot.command.fun.anime.horriblesubs;
 import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
-import io.reticent.eevee.parser.arguments.Argument;
 import io.reticent.eevee.parser.arguments.Arguments;
 import io.reticent.eevee.parser.arguments.LiteralArgument;
 import io.reticent.eevee.parser.arguments.StringArgument;
@@ -14,6 +13,7 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import java.util.List;
 import java.util.Optional;
 
 public class HSReleaseUnsubscribeCommand extends Command {
@@ -34,10 +34,8 @@ public class HSReleaseUnsubscribeCommand extends Command {
     }
 
     @Override
-    public Permission[] getRequiredPermissions() {
-        return new Permission[]{
-            Permission.MANAGE_CHANNEL
-        };
+    public List<Permission> getRequiredPermissions() {
+        return ImmutableList.of(Permission.MANAGE_CHANNEL);
     }
 
     @Override

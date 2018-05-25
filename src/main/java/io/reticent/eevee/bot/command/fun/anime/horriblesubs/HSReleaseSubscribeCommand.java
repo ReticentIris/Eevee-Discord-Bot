@@ -3,7 +3,6 @@ package io.reticent.eevee.bot.command.fun.anime.horriblesubs;
 import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
-import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.provider.UUIDProvider;
 import io.reticent.eevee.repository.model.HSReleaseAnnouncer;
@@ -14,6 +13,8 @@ import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+
+import java.util.List;
 
 @Log4j2
 public class HSReleaseSubscribeCommand extends Command {
@@ -38,10 +39,8 @@ public class HSReleaseSubscribeCommand extends Command {
     }
 
     @Override
-    public Permission[] getRequiredPermissions() {
-        return new Permission[]{
-            Permission.MANAGE_CHANNEL
-        };
+    public List<Permission> getRequiredPermissions() {
+        return ImmutableList.of(Permission.MANAGE_CHANNEL);
     }
 
     @Override

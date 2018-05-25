@@ -1,10 +1,13 @@
 package io.reticent.eevee.bot.command;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.parser.arguments.Arguments;
 import io.reticent.eevee.util.RateLimiter;
 import lombok.NonNull;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+
+import java.util.List;
 
 public abstract class Command {
     public void bootstrap() {}
@@ -13,8 +16,8 @@ public abstract class Command {
         return false;
     }
 
-    public Permission[] getRequiredPermissions() {
-        return new Permission[]{};
+    public List<Permission> getRequiredPermissions() {
+        return ImmutableList.of();
     }
 
     public RateLimiter getRateLimiter() {

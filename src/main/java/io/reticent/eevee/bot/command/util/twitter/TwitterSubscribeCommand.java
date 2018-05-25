@@ -3,7 +3,6 @@ package io.reticent.eevee.bot.command.util.twitter;
 import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
-import io.reticent.eevee.parser.arguments.Argument;
 import io.reticent.eevee.parser.arguments.Arguments;
 import io.reticent.eevee.parser.arguments.LiteralArgument;
 import io.reticent.eevee.parser.arguments.StringArgument;
@@ -22,6 +21,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Log4j2
@@ -47,10 +47,8 @@ public class TwitterSubscribeCommand extends Command {
     }
 
     @Override
-    public Permission[] getRequiredPermissions() {
-        return new Permission[]{
-            Permission.MANAGE_CHANNEL
-        };
+    public List<Permission> getRequiredPermissions() {
+        return ImmutableList.of(Permission.MANAGE_CHANNEL);
     }
 
     @Override
