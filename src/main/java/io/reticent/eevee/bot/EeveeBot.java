@@ -78,8 +78,10 @@ public class EeveeBot extends ListenerAdapter {
 
         Command command = commandOptional.get();
 
-        if (!isBotOwner(event.getAuthor().getId()) && command.requiresBotOwner() && !canInvoke(command, event)) {
-            return;
+        if (!isBotOwner(event.getAuthor().getId())) {
+            if (command.requiresBotOwner() || !canInvoke(command, event)) {
+                return;
+            }
         }
 
         try {
