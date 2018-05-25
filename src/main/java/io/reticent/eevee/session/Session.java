@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reticent.eevee.configuration.Configuration;
 import io.reticent.eevee.repository.HSReleaseAnnouncerDataRepository;
 import io.reticent.eevee.repository.ReminderDataRepository;
+import io.reticent.eevee.repository.TweetAnnouncerDataRepository;
 import lombok.*;
 import net.dv8tion.jda.core.JDA;
 
@@ -18,6 +19,8 @@ public class Session {
     private ReminderDataRepository reminderDataRepository;
     @NonNull
     private HSReleaseAnnouncerDataRepository hsReleaseAnnouncerDataRepository;
+    @NonNull
+    private TweetAnnouncerDataRepository tweetAnnouncerDataRepository;
     @NonNull
     private ObjectMapper objectMapper;
 

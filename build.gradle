@@ -31,6 +31,8 @@ dependencies {
 
     compile group: 'org.mongodb', name: 'mongodb-driver-async', version: '3.7.0'
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.7.0'
+
+    compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.6'
 }
 
 lombok {

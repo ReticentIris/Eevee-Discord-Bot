@@ -54,12 +54,7 @@ public class HSReleaseUnsubscribeCommand extends Command {
         HSReleaseUnsubscribeCommandArguments args = (HSReleaseUnsubscribeCommandArguments) arguments;
         Optional<HSReleaseAnnouncer> announcerOptional = Session.getSession()
                                                                 .getHsReleaseAnnouncerDataRepository()
-                                                                .getAnnouncers()
-                                                                .stream()
-                                                                .filter(announcer -> announcer.getChannelId().equals(event.getChannel().getId()))
-                                                                .filter(announcer -> announcer.getAnime().equalsIgnoreCase(args.getAnimeName()))
-                                                                .filter(announcer -> announcer.getQuality().equalsIgnoreCase(args.getQuality()))
-                                                                .findFirst();
+                                                                .getAnnouncer(args.getAnimeName(), args.getQuality(), event.getChannel().getId());
 
         EmbedBuilder embedBuilder = new EmbedBuilder();
 

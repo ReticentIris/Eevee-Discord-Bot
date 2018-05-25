@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import java.util.List;
 import java.util.Optional;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 
 @Log4j2
@@ -40,8 +41,12 @@ public class HSReleaseAnnouncerDataRepository extends DataRepository {
         return ImmutableList.copyOf(MONGO_COLLECTION.find());
     }
 
-    public Optional<HSReleaseAnnouncer> getAnnouncer(String announcerId) {
-        return getAnnouncers().stream().filter(announcer -> announcer.getAnnouncerId().equals(announcerId)).findFirst();
+    public Optional<HSReleaseAnnouncer> getAnnouncer(String anime, String quality, String channelId) {
+        return getAnnouncers().stream()
+                              .filter(a -> a.getAnime().equalsIgnoreCase(anime))
+                              .filter(a -> a.getQuality().equalsIgnoreCase(quality))
+                              .filter(a -> a.getChannelId().equals(channelId))
+                              .findFirst();
     }
 
     public void add(HSReleaseAnnouncer announcer) {

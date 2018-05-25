@@ -59,6 +59,23 @@ public class HSReleaseSubscribeCommand extends Command {
     public void invoke(@NonNull MessageReceivedEvent event, @NonNull CommandArguments arguments) {
         HSReleaseSubscribeCommandArguments args = (HSReleaseSubscribeCommandArguments) arguments;
 
+        if (
+            Session.getSession()
+                   .getHsReleaseAnnouncerDataRepository()
+                   .getAnnouncer(args.getAnimeName(), args.getQuality(), event.getChannel().getId())
+                   .isPresent()
+            ) {
+            EmbedBuilder embedBuilder = new EmbedBuilder();
+            embedBuilder.setTitle("Oops! An error occurred.");
+            embedBuilder.setColor(Session.getSession().getConfiguration().readInt("errorEmbedColorDecimal"));
+            embedBuilder.setDescription(
+                String.format("A subscription for *%s* in %s already exists for this channel.", args.getAnimeName(), args.getQuality())
+            );
+
+            event.getChannel().sendMessage(embedBuilder.build()).queue();
+            return;
+        }
+
         HSReleaseAnnouncer hsReleaseAnnouncer = HSReleaseAnnouncer.builder()
                                                                   .anime(args.getAnimeName())
                                                                   .quality(args.getQuality())

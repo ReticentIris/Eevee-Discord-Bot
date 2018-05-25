@@ -12,6 +12,8 @@ import io.reticent.eevee.bot.command.util.remind.RemindCommand;
 import io.reticent.eevee.bot.command.util.stats.StatsCommand;
 import io.reticent.eevee.bot.command.util.translate.TranslateCommand;
 import io.reticent.eevee.bot.command.util.f12.F12Command;
+import io.reticent.eevee.bot.command.util.twitter.TwitterSubscribeCommand;
+import io.reticent.eevee.bot.command.util.twitter.TwitterUnsubscribeCommand;
 import io.reticent.eevee.session.Session;
 import io.reticent.eevee.util.RateLimiter;
 import lombok.Builder;
@@ -49,6 +51,8 @@ public class EeveeBot extends ListenerAdapter {
         commandMapper.add(new HSReleaseSubscribeCommand());
         commandMapper.add(new HSReleaseUnsubscribeCommand());
         commandMapper.add(new JishoCommand());
+        commandMapper.add(new TwitterSubscribeCommand());
+        commandMapper.add(new TwitterUnsubscribeCommand());
 
         log.info(String.format("Registered %s commands.", commandMapper.getBotCommands().size()));
     }

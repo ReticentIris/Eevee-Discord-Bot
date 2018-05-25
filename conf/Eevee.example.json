@@ -8,10 +8,16 @@
   "successEmbedColorHex": "#aaf7d1",
   "successEmbedColorDecimal": 11204561,
   "botOwnerId": "",
+  "twitterApiConsumerKey": "",
+  "twitterApiConsumerSecret": "",
+  "twitterApiAccessToken": "",
+  "twitterApiAccessSecret": "",
+  "tweetCheckDelay": 300000,
   "animeReleaseDetailExtractionRegex": "\\[(.+)\\][ _]+(.+?)[ _]*-?[ _]*(\\d+)[ _]*((\\[|\\().*((480|720|1080|BD)p?).*(\\]|\\)))?([ _]*\\[.+][ _]*)?\\.(\\w+)",
   "animeReleaseCheckDelay": 300000,
   "eevees": [],
   "mongoDatabaseName": "eevee",
   "mongoReminderCollectionName": "reminders",
-  "mongoHSReleaseAnnouncerCollectionName": "hsReleaseAnnouncements"
+  "mongoHSReleaseAnnouncerCollectionName": "hsReleaseAnnouncements",
+  "mongoTweetAnnouncerCollectionName": "tweetAnnouncers"
 }

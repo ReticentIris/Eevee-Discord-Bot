@@ -7,6 +7,7 @@ import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.configuration.Configuration;
 import io.reticent.eevee.repository.HSReleaseAnnouncerDataRepository;
 import io.reticent.eevee.repository.ReminderDataRepository;
+import io.reticent.eevee.repository.TweetAnnouncerDataRepository;
 import io.reticent.eevee.session.Session;
 import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.AccountType;
@@ -31,6 +32,7 @@ public class Eevee {
 
         Session.getSession().setReminderDataRepository(ReminderDataRepository.getInstance());
         Session.getSession().setHsReleaseAnnouncerDataRepository(HSReleaseAnnouncerDataRepository.getInstance());
+        Session.getSession().setTweetAnnouncerDataRepository(TweetAnnouncerDataRepository.getInstance());
 
         try {
             log.info(String.format("Using bot token: %s.", configuration.readString("botToken")));

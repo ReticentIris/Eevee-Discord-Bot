@@ -11,4 +11,5 @@ public class GlobalConfiguration {
     public static final String HORRIBLE_SUBS_RELEASE_FEED_RUL = "http://horriblesubs.info/rss.php?res=all";
     public static final String GOOGLE_API_CRED_ENV_VAR_NAME = "GOOGLE_APPLICATION_CREDENTIALS";
     public static final String JISHO_SEARCH_API_URL = "https://jisho.org/api/v1/search/words?keyword=%s";
+    public static final String TWITTER_PERMALINK = "https://twitter.com/%s/status/%s";
 }

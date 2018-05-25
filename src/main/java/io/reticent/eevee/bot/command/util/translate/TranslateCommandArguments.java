@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TranslateCommandArguments extends CommandArguments {
     @Getter
-    String targetLanguage;
+    private String targetLanguage;
     @Getter
     private List<String> sourceText;
 }

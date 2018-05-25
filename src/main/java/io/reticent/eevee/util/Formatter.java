@@ -31,4 +31,12 @@ public class Formatter {
         
         return Arrays.stream(permissions).map(Permission::getName).collect(Collectors.joining(", "));
     }
+
+    public static String formatTwitterUser(String user) {
+        if (!user.startsWith("@")) {
+            return String.format("@%s", user);
+        }
+
+        return user;
+    }
 }
