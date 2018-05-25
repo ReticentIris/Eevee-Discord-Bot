@@ -46,14 +46,12 @@ public class HSReleaseSubscribeCommand extends Command {
 
     @Override
     public Arguments<? extends CommandArguments> getArguments() {
-        Argument[] argsArray = {
+        return new Arguments<>(ImmutableList.of(
             new LiteralArgument("hs"),
             new LiteralArgument("subscribe"),
             new StringArgument("animeName"),
             new OrArgument("quality", ImmutableList.of("480p", "720p", "1080p"))
-        };
-
-        return new Arguments<>(ImmutableList.copyOf(argsArray), HSReleaseSubscribeCommandArguments.class);
+        ), HSReleaseSubscribeCommandArguments.class);
     }
 
     @Override

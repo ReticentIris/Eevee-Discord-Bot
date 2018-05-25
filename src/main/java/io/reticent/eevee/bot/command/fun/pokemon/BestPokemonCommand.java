@@ -30,12 +30,10 @@ public class BestPokemonCommand extends Command {
 
     @Override
     public Arguments<? extends CommandArguments> getArguments() {
-        Argument[] argsArray = {
+        return new Arguments<>(ImmutableList.of(
             new LiteralArgument("best"),
             new LiteralArgument("pokemon?")
-        };
-
-        return new Arguments<>(ImmutableList.copyOf(argsArray), BestPokemonCommandArguments.class);
+        ), BestPokemonCommandArguments.class);
     }
 
     @Override

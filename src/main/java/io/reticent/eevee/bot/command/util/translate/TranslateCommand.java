@@ -59,13 +59,11 @@ public class TranslateCommand extends Command {
 
     @Override
     public Arguments<TranslateCommandArguments> getArguments() {
-        Argument[] argsArray = {
+        return new Arguments<>(ImmutableList.of(
             new LiteralArgument("translate"),
             new StringArgument("targetLanguage"),
             new VariadicArgument<StringArgument,String>("sourceText", new StringArgument("foo"))
-        };
-
-        return new Arguments<>(ImmutableList.copyOf(argsArray), TranslateCommandArguments.class);
+        ), TranslateCommandArguments.class);
     }
 
     @Override

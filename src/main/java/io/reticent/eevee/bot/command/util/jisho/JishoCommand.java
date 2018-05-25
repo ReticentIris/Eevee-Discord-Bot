@@ -38,12 +38,10 @@ public class JishoCommand extends Command {
 
     @Override
     public Arguments<? extends CommandArguments> getArguments() {
-        Argument[] arguments = {
+        return new Arguments<>(ImmutableList.of(
             new LiteralArgument("jisho"),
             new StringArgument("searchQuery")
-        };
-
-        return new Arguments<>(ImmutableList.copyOf(arguments), JishoCommandArguments.class);
+        ), JishoCommandArguments.class);
     }
 
     @Override

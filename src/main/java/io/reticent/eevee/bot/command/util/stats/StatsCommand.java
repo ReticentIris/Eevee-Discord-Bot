@@ -39,11 +39,9 @@ public class StatsCommand extends Command {
 
     @Override
     public Arguments<? extends CommandArguments> getArguments() {
-        Argument[] argsArray = {
+        return new Arguments<>(ImmutableList.of(
             new LiteralArgument("stats")
-        };
-
-        return new Arguments<>(ImmutableList.copyOf(argsArray), StatsCommandArguments.class);
+        ), StatsCommandArguments.class);
     }
 
     @Override

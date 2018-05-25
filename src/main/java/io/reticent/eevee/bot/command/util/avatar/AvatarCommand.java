@@ -29,15 +29,16 @@ public class AvatarCommand extends Command {
     @Override
     public Arguments<AvatarCommandArguments> getArguments() {
         Argument[] argsArray = {
+        };
+
+        return new Arguments<>(ImmutableList.of(
             new LiteralArgument("avatar"),
             new MemberArgument("mentionedMember").withOptions(
                 ArgumentOptions.builder()
                                .required(false)
                                .build()
             )
-        };
-
-        return new Arguments<>(ImmutableList.copyOf(argsArray), AvatarCommandArguments.class);
+        ), AvatarCommandArguments.class);
     }
 
     @Override

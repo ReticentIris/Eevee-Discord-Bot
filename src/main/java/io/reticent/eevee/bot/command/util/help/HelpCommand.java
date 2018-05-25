@@ -38,16 +38,14 @@ public class HelpCommand extends Command {
 
     @Override
     public Arguments<? extends CommandArguments> getArguments() {
-        Argument[] argsArray = {
+        return new Arguments<>(ImmutableList.of(
             new LiteralArgument("help"),
             new StringArgument("commandShortName").withOptions(
                 ArgumentOptions.builder()
                                .required(false)
                                .build()
             )
-        };
-
-        return new Arguments<>(ImmutableList.copyOf(argsArray), HelpCommandArguments.class);
+        ), HelpCommandArguments.class);
     }
 
     @Override

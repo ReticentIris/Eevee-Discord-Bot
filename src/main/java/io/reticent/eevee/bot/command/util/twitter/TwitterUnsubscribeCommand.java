@@ -43,13 +43,11 @@ public class TwitterUnsubscribeCommand extends Command {
 
     @Override
     public Arguments<? extends CommandArguments> getArguments() {
-        Argument[] args = new Argument[]{
+        return new Arguments<>(ImmutableList.of(
             new LiteralArgument("twitter"),
             new LiteralArgument("unsubscribe"),
             new StringArgument("user")
-        };
-
-        return new Arguments<>(ImmutableList.copyOf(args), TwitterUnsubscribeCommandArguments.class);
+        ), TwitterUnsubscribeCommandArguments.class);
     }
 
     @Override

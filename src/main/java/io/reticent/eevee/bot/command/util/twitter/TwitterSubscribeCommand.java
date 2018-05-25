@@ -55,13 +55,11 @@ public class TwitterSubscribeCommand extends Command {
 
     @Override
     public Arguments<? extends CommandArguments> getArguments() {
-        Argument[] args = new Argument[]{
+        return new Arguments<>(ImmutableList.of(
             new LiteralArgument("twitter"),
             new LiteralArgument("subscribe"),
             new StringArgument("user")
-        };
-
-        return new Arguments<>(ImmutableList.copyOf(args), TwitterSubscribeCommandArguments.class);
+        ), TwitterSubscribeCommandArguments.class);
     }
 
     @Override
