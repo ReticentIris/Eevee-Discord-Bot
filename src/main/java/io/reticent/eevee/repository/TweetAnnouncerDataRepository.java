@@ -3,6 +3,8 @@ package io.reticent.eevee.repository;
 import com.google.common.collect.ImmutableList;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Collation;
+import com.mongodb.client.model.CollationStrength;
 import io.reticent.eevee.provider.MongoClientProvider;
 import io.reticent.eevee.repository.model.TweetAnnouncer;
 import io.reticent.eevee.session.Session;
@@ -11,6 +13,7 @@ import lombok.extern.log4j.Log4j2;
 import java.util.List;
 import java.util.Optional;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 
 @Log4j2
@@ -41,10 +44,17 @@ public class TweetAnnouncerDataRepository extends DataRepository {
     }
 
     public Optional<TweetAnnouncer> getAnnouncer(String user, String channelId) {
-        return getAnnouncers().stream()
-                              .filter(a -> a.getUser().equalsIgnoreCase(user))
-                              .filter(a -> a.getChannelId().equals(channelId))
-                              .findFirst();
+        return Optional.ofNullable(MONGO_COLLECTION.find(
+            and(
+                eq("channelId", channelId),
+                eq("user", user)
+            )
+        ).collation(
+            Collation.builder()
+                     .locale("en")
+                     .collationStrength(CollationStrength.PRIMARY)
+                     .build()
+        ).first());
     }
 
     public void add(TweetAnnouncer announcer) {

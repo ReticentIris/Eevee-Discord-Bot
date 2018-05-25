@@ -66,7 +66,7 @@ public class EeveeBot extends ListenerAdapter {
             return;
         }
 
-        log.debug(String.format("Receied potential command: %s.", messageText));
+        log.debug(String.format("Received potential command: %s.", messageText));
 
         messageText = messageText.substring(botPrefix.length());
 

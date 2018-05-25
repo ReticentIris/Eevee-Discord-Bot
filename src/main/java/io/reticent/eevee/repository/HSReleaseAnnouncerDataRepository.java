@@ -3,6 +3,8 @@ package io.reticent.eevee.repository;
 import com.google.common.collect.ImmutableList;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Collation;
+import com.mongodb.client.model.CollationStrength;
 import io.reticent.eevee.provider.MongoClientProvider;
 import io.reticent.eevee.repository.model.HSReleaseAnnouncer;
 import io.reticent.eevee.session.Session;
@@ -42,11 +44,18 @@ public class HSReleaseAnnouncerDataRepository extends DataRepository {
     }
 
     public Optional<HSReleaseAnnouncer> getAnnouncer(String anime, String quality, String channelId) {
-        return getAnnouncers().stream()
-                              .filter(a -> a.getAnime().equalsIgnoreCase(anime))
-                              .filter(a -> a.getQuality().equalsIgnoreCase(quality))
-                              .filter(a -> a.getChannelId().equals(channelId))
-                              .findFirst();
+        return Optional.ofNullable(MONGO_COLLECTION.find(
+            and(
+                eq("channelId", channelId),
+                eq("anime", anime),
+                eq("quality", quality)
+            )
+        ).collation(
+            Collation.builder()
+                     .locale("en")
+                     .collationStrength(CollationStrength.PRIMARY)
+                     .build()
+        ).first());
     }
 
     public void add(HSReleaseAnnouncer announcer) {
