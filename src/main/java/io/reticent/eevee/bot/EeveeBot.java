@@ -104,6 +104,9 @@ public class EeveeBot extends ListenerAdapter {
         }
 
         Permission[] permissions = (Permission[]) command.getRequiredPermissions().toArray();
+    
+   
+        log.debug(String.format("%s", event.getMember().hasPermission(permissions);
 
         return event.getMember().hasPermission(permissions);
     }
