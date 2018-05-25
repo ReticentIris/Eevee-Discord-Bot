@@ -6,7 +6,7 @@ import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
 
 public class MemberArgument extends Argument {
-    public MemberArgument(@NonNull String name) {
+    public MemberArgument(String name) {
         super(name);
     }
 

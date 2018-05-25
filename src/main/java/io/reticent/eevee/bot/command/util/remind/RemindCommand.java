@@ -1,5 +1,6 @@
 package io.reticent.eevee.bot.command.util.remind;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.exc.DataRepositoryException;
@@ -54,51 +55,51 @@ public class RemindCommand extends Command {
             new LiteralArgument("remind"),
             new LiteralArgument("me"),
             new LiteralArgument("in"),
-            new Arguments<>(new Argument[]{
+            new Arguments<>(ImmutableList.of(
                 new NumberArgument("days").withOptions(
                     ArgumentOptions.builder()
                                    .required(false)
                                    .defaultValue(0)
                                    .build()
                 ),
-                new OrArgument("daysLabel", new String[]{"days", "day"})
-            }, RemindCommandArguments.class).withOptions(
+                new OrArgument("daysLabel", ImmutableList.of("days", "day"))
+            ), RemindCommandArguments.class).withOptions(
                 ArgumentOptions.builder()
                                .required(false)
                                .build()
             ),
-            new Arguments<>(new Argument[]{
+            new Arguments<>(ImmutableList.of(
                 new NumberArgument("hours").withOptions(
                     ArgumentOptions.builder()
                                    .defaultValue(0)
                                    .build()
                 ),
-                new OrArgument("hoursLabel", new String[]{"hours", "hour"})
-            }, RemindCommandArguments.class).withOptions(
+                new OrArgument("hoursLabel", ImmutableList.of("hours", "hour"))
+            ), RemindCommandArguments.class).withOptions(
                 ArgumentOptions.builder()
                                .required(false)
                                .build()
             ),
-            new Arguments<>(new Argument[]{
+            new Arguments<>(ImmutableList.of(
                 new NumberArgument("minutes").withOptions(
                     ArgumentOptions.builder()
                                    .defaultValue(0)
                                    .build()
                 ),
-                new OrArgument("minutesLabel", new String[]{"minutes", "minute"})
-            }, RemindCommandArguments.class).withOptions(
+                new OrArgument("minutesLabel", ImmutableList.of("minutes", "minute"))
+            ), RemindCommandArguments.class).withOptions(
                 ArgumentOptions.builder()
                                .required(false)
                                .build()
             ),
-            new Arguments<>(new Argument[]{
+            new Arguments<>(ImmutableList.of(
                 new NumberArgument("seconds").withOptions(
                     ArgumentOptions.builder()
                                    .defaultValue(0)
                                    .build()
                 ),
-                new OrArgument("secondsLabel", new String[]{"seconds", "second"})
-            }, RemindCommandArguments.class).withOptions(
+                new OrArgument("secondsLabel", ImmutableList.of("seconds", "second"))
+            ), RemindCommandArguments.class).withOptions(
                 ArgumentOptions.builder()
                                .required(false)
                                .build()
@@ -107,7 +108,7 @@ public class RemindCommand extends Command {
             new VariadicArgument<StringArgument, String>("action", new StringArgument("foo"))
         };
 
-        return new Arguments<>(argsArray, RemindCommandArguments.class);
+        return new Arguments<>(ImmutableList.copyOf(argsArray), RemindCommandArguments.class);
     }
 
     @Override

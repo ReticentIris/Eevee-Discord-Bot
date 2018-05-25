@@ -1,5 +1,6 @@
 package io.reticent.eevee.bot.command.util.twitter;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.Argument;
@@ -29,7 +30,6 @@ public class TwitterSubscribeCommand extends Command {
     public void bootstrap() {
         TweetAnnouncerService.getInstance().start();
     }
-
 
     @Override
     public String getShortLabel() {
@@ -61,7 +61,7 @@ public class TwitterSubscribeCommand extends Command {
             new StringArgument("user")
         };
 
-        return new Arguments<>(args, TwitterSubscribeCommandArguments.class);
+        return new Arguments<>(ImmutableList.copyOf(args), TwitterSubscribeCommandArguments.class);
     }
 
     @Override

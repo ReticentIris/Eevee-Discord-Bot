@@ -1,17 +1,12 @@
 package io.reticent.eevee.parser;
 
-import io.reticent.eevee.configuration.ParserConfiguration;
-
 import java.util.Stack;
 
 public class Tokenizer {
+    private static final char[] WHITESPACE_CHARACTERS = {' ', '\n', '\t'};
     private int currentIndex;
     private Stack<Integer> indexStack;
     private char[] str;
-
-    private final char DOUBLE_QUOTE = '"';
-    private final char SINGLE_QUOTE = '\'';
-    private final char ESCAPE_CHAR = '\\';
 
     public Tokenizer(String str) {
         currentIndex = 0;
@@ -23,6 +18,10 @@ public class Tokenizer {
         if (currentIndex >= str.length) {
             return null;
         }
+
+        final char DOUBLE_QUOTE = '"';
+        final char SINGLE_QUOTE = '\'';
+        final char ESCAPE_CHAR = '\\';
 
         boolean escape = false;
         boolean double_quote = false;
@@ -63,7 +62,7 @@ public class Tokenizer {
     }
 
     private boolean isWhitespace(char c) {
-        for (char whitespace : ParserConfiguration.WHITESPACE_CHARACTERS) {
+        for (char whitespace : Tokenizer.WHITESPACE_CHARACTERS) {
             if (whitespace == c) {
                 return true;
             }

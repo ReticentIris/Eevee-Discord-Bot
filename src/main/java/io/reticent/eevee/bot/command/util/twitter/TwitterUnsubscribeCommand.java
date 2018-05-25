@@ -1,5 +1,6 @@
 package io.reticent.eevee.bot.command.util.twitter;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.Argument;
@@ -48,7 +49,7 @@ public class TwitterUnsubscribeCommand extends Command {
             new StringArgument("user")
         };
 
-        return new Arguments<>(args, TwitterUnsubscribeCommandArguments.class);
+        return new Arguments<>(ImmutableList.copyOf(args), TwitterUnsubscribeCommandArguments.class);
     }
 
     @Override

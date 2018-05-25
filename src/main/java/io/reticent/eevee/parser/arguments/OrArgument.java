@@ -3,10 +3,12 @@ package io.reticent.eevee.parser.arguments;
 import io.reticent.eevee.parser.Tokenizer;
 import net.dv8tion.jda.core.entities.Message;
 
-public class OrArgument extends Argument {
-    private String[] options;
+import java.util.List;
 
-    public OrArgument(String name, String[] options) {
+public class OrArgument extends Argument {
+    private List<String> options;
+
+    public OrArgument(String name, List<String> options) {
         super(name);
         this.options = options;
     }

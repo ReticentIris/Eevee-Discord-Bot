@@ -10,7 +10,7 @@ import java.util.List;
 public class VariadicArgument<BaseType extends Argument, ReturnType> extends Argument {
     private BaseType dummy;
 
-    public VariadicArgument(@NonNull String name, @NonNull BaseType dummy) {
+    public VariadicArgument(String name, @NonNull BaseType dummy) {
         super(name);
         this.dummy = dummy;
     }

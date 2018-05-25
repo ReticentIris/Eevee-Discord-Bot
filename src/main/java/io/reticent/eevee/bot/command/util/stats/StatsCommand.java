@@ -1,5 +1,6 @@
 package io.reticent.eevee.bot.command.util.stats;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.*;
@@ -42,7 +43,7 @@ public class StatsCommand extends Command {
             new LiteralArgument("stats")
         };
 
-        return new Arguments<>(argsArray, StatsCommandArguments.class);
+        return new Arguments<>(ImmutableList.copyOf(argsArray), StatsCommandArguments.class);
     }
 
     @Override

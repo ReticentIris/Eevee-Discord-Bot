@@ -1,5 +1,6 @@
 package io.reticent.eevee.bot.command.util.help;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.CommandMapper;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
@@ -46,7 +47,7 @@ public class HelpCommand extends Command {
             )
         };
 
-        return new Arguments<>(argsArray, HelpCommandArguments.class);
+        return new Arguments<>(ImmutableList.copyOf(argsArray), HelpCommandArguments.class);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class HelpCommand extends Command {
 
             embedBuilder.setTitle("Eevee Help Directory");
             embedBuilder.setDescription(String.format(
-                "Type one of the commands below to see help information for a command.\n" +
+                "Type one of the commands below to see help information for a command.%n" +
                     "The bot prefix is `%s`.",
                 Session.getSession().getConfiguration().readString("botPrefix")
             ));

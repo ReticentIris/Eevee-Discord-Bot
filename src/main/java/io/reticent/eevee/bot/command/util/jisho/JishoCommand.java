@@ -1,5 +1,6 @@
 package io.reticent.eevee.bot.command.util.jisho;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.Argument;
@@ -42,7 +43,7 @@ public class JishoCommand extends Command {
             new StringArgument("searchQuery")
         };
 
-        return new Arguments<>(arguments, JishoCommandArguments.class);
+        return new Arguments<>(ImmutableList.copyOf(arguments), JishoCommandArguments.class);
     }
 
     @Override
@@ -107,7 +108,7 @@ public class JishoCommand extends Command {
         String notes = String.join("; ", sense.getTags());
 
         if (!sense.getInfo().isEmpty()) {
-            notes = String.format("%s\n*%s*", notes, String.join("; ", sense.getInfo()));
+            notes = String.format("%s%n*%s*", notes, String.join("; ", sense.getInfo()));
         }
 
         return notes;

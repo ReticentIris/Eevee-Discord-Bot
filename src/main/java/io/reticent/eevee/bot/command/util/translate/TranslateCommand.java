@@ -5,6 +5,7 @@ import com.google.cloud.translate.Translate.TranslateOption;
 import com.google.cloud.translate.TranslateException;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.configuration.GlobalConfiguration;
@@ -64,7 +65,7 @@ public class TranslateCommand extends Command {
             new VariadicArgument<StringArgument,String>("sourceText", new StringArgument("foo"))
         };
 
-        return new Arguments<>(argsArray, TranslateCommandArguments.class);
+        return new Arguments<>(ImmutableList.copyOf(argsArray), TranslateCommandArguments.class);
     }
 
     @Override

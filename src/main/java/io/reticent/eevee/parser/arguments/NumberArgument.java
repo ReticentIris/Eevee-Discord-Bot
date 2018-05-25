@@ -5,7 +5,7 @@ import lombok.NonNull;
 import net.dv8tion.jda.core.entities.Message;
 
 public class NumberArgument extends Argument {
-    public NumberArgument(@NonNull String name) {
+    public NumberArgument(String name) {
         super(name);
     }
 
@@ -18,7 +18,7 @@ public class NumberArgument extends Argument {
         }
 
         try {
-            double d = Double.parseDouble(token);
+            Double.parseDouble(token);
             return true;
         } catch (NumberFormatException e) {
             return false;

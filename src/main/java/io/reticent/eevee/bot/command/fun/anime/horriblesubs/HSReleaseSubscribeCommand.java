@@ -1,5 +1,6 @@
 package io.reticent.eevee.bot.command.fun.anime.horriblesubs;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.exc.InvalidConfigurationException;
@@ -49,10 +50,10 @@ public class HSReleaseSubscribeCommand extends Command {
             new LiteralArgument("hs"),
             new LiteralArgument("subscribe"),
             new StringArgument("animeName"),
-            new OrArgument("quality", new String[]{"480p", "720p", "1080p"})
+            new OrArgument("quality", ImmutableList.of("480p", "720p", "1080p"))
         };
 
-        return new Arguments<>(argsArray, HSReleaseSubscribeCommandArguments.class);
+        return new Arguments<>(ImmutableList.copyOf(argsArray), HSReleaseSubscribeCommandArguments.class);
     }
 
     @Override

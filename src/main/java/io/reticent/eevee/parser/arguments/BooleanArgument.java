@@ -1,12 +1,14 @@
 package io.reticent.eevee.parser.arguments;
 
-import io.reticent.eevee.configuration.ParserConfiguration;
 import io.reticent.eevee.parser.Tokenizer;
 import lombok.NonNull;
 import net.dv8tion.jda.core.entities.Message;
 
 public class BooleanArgument extends Argument {
-    public BooleanArgument(@NonNull String name) {
+    private static final String[] TRUE_BOOLEAN_STRING_VALUES = {"yes"};
+    private static final String[] FALSE_BOOLEAN_STRING_VALUES = {"no"};
+
+    public BooleanArgument(String name) {
         super(name);
     }
 
@@ -14,13 +16,13 @@ public class BooleanArgument extends Argument {
     public boolean isValid(@NonNull Tokenizer tokens, @NonNull Message message) {
         String token = tokens.next();
 
-        for (String str : ParserConfiguration.TRUE_BOOLEAN_STRING_VALUES) {
+        for (String str : BooleanArgument.TRUE_BOOLEAN_STRING_VALUES) {
             if (str.equalsIgnoreCase(token)) {
                 return true;
             }
         }
 
-        for (String str : ParserConfiguration.FALSE_BOOLEAN_STRING_VALUES) {
+        for (String str : BooleanArgument.FALSE_BOOLEAN_STRING_VALUES) {
             if (str.equalsIgnoreCase(token)) {
                 return true;
             }
@@ -33,7 +35,7 @@ public class BooleanArgument extends Argument {
     public Boolean parse(@NonNull Tokenizer tokens, @NonNull Message message) {
         String token = tokens.next();
 
-        for (String str : ParserConfiguration.TRUE_BOOLEAN_STRING_VALUES) {
+        for (String str : BooleanArgument.TRUE_BOOLEAN_STRING_VALUES) {
             if (str.equalsIgnoreCase(token)) {
                 return true;
             }

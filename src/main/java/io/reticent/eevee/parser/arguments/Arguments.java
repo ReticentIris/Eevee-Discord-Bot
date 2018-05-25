@@ -8,14 +8,15 @@ import net.dv8tion.jda.core.entities.Message;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Arguments<ObjectMap> extends Argument {
     @Getter
-    private Argument[] arguments;
+    private List<Argument> arguments;
     private Class<ObjectMap> mapClass;
 
-    public Arguments(Argument[] arguments, Class<ObjectMap> mapClass) {
+    public Arguments(List<Argument> arguments, Class<ObjectMap> mapClass) {
         this.arguments = arguments;
         this.mapClass = mapClass;
     }
@@ -101,7 +102,9 @@ public class Arguments<ObjectMap> extends Argument {
                 if (!((Arguments) arg).isPartialValid(tokens, message) && !arg.getOptions().isRequired()) {
                     tokens.pop();
 
-                    for (Argument subArgument : ((Arguments) arg).getArguments()) {
+                    List<Argument> subArguments = ((Arguments) arg).getArguments();
+
+                    for (Argument subArgument : subArguments) {
                         Object defaultValue = subArgument.getOptions().getDefaultValue();
 
                         if (defaultValue == null) {
@@ -141,6 +144,6 @@ public class Arguments<ObjectMap> extends Argument {
 
     @Override
     public String toString() {
-        return Arrays.stream(arguments).map(Object::toString).collect(Collectors.joining(" "));
+        return arguments.stream().map(Object::toString).collect(Collectors.joining(" "));
     }
 }

@@ -1,5 +1,6 @@
 package io.reticent.eevee.bot.command.util.avatar;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.*;
@@ -36,7 +37,7 @@ public class AvatarCommand extends Command {
             )
         };
 
-        return new Arguments<>(argsArray, AvatarCommandArguments.class);
+        return new Arguments<>(ImmutableList.copyOf(argsArray), AvatarCommandArguments.class);
     }
 
     @Override

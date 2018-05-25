@@ -5,7 +5,7 @@ import lombok.NonNull;
 import net.dv8tion.jda.core.entities.Message;
 
 public class StringArgument extends Argument {
-    public StringArgument(@NonNull String name) {
+    public StringArgument(String name) {
         super(name);
     }
 

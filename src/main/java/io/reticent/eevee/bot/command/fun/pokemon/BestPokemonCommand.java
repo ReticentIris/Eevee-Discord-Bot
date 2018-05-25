@@ -1,5 +1,6 @@
 package io.reticent.eevee.bot.command.fun.pokemon;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.*;
@@ -34,7 +35,7 @@ public class BestPokemonCommand extends Command {
             new LiteralArgument("pokemon?")
         };
 
-        return new Arguments<>(argsArray, BestPokemonCommandArguments.class);
+        return new Arguments<>(ImmutableList.copyOf(argsArray), BestPokemonCommandArguments.class);
     }
 
     @Override

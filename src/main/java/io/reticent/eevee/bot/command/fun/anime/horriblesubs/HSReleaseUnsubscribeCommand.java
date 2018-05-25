@@ -1,5 +1,6 @@
 package io.reticent.eevee.bot.command.fun.anime.horriblesubs;
 
+import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
 import io.reticent.eevee.parser.arguments.Argument;
@@ -41,12 +42,12 @@ public class HSReleaseUnsubscribeCommand extends Command {
 
     @Override
     public Arguments<? extends CommandArguments> getArguments() {
-        return new Arguments<>(new Argument[]{
+        return new Arguments<>(ImmutableList.of(
             new LiteralArgument("hs"),
             new LiteralArgument("unsubscribe"),
             new StringArgument("animeName"),
             new StringArgument("quality")
-        }, HSReleaseUnsubscribeCommandArguments.class);
+        ), HSReleaseUnsubscribeCommandArguments.class);
     }
 
     @Override

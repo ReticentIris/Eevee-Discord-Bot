@@ -22,7 +22,7 @@ public abstract class Command {
     }
 
     public String toString() {
-        return String.format("**__%s__**\n\n%s\n\n```%s```\n", getLabel(), getDescription(), getArguments());
+        return String.format("**__%s__**%n%n%s%n%n```%s```%n", getLabel(), getDescription(), getArguments());
     }
 
     public abstract String getShortLabel();
