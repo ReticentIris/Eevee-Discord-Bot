@@ -7,7 +7,6 @@ import lombok.NonNull;
 import net.dv8tion.jda.core.entities.Message;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
