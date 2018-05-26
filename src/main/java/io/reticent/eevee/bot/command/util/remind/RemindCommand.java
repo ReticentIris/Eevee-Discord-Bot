@@ -3,8 +3,6 @@ package io.reticent.eevee.bot.command.util.remind;
 import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
-import io.reticent.eevee.exc.DataRepositoryException;
-import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.repository.model.Reminder;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.service.ReminderService;
@@ -14,12 +12,9 @@ import io.reticent.eevee.util.TimeUtil;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import java.time.Duration;
 import java.time.Instant;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Log4j2

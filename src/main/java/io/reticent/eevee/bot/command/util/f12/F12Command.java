@@ -3,7 +3,6 @@ package io.reticent.eevee.bot.command.util.f12;
 import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
-import io.reticent.eevee.exc.InvalidConfigurationException;
 import io.reticent.eevee.parser.arguments.*;
 import io.reticent.eevee.session.Session;
 import io.reticent.eevee.util.Formatter;
