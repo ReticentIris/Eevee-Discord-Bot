@@ -56,7 +56,7 @@ public class TweetAnnouncerService implements Service {
         Map<String, List<Status>> latestTweetMap = new HashMap<>();
 
         announcerList.forEach(announcer -> {
-            log.debug(String.format("Checking for new Tweet from %s.", announcer.getUser()));
+            log.debug(String.format("Checking for new tweet from %s.", announcer.getUser()));
             List<Status> latestTweets;
 
             if (!latestTweetMap.containsKey(announcer.getUser().toLowerCase())) {
@@ -116,7 +116,7 @@ public class TweetAnnouncerService implements Service {
 
                 log.debug(
                     String.format(
-                        "Issued announcement for new tweet from %s to channel: %s.'",
+                        "Issued announcement for new tweet from %s to channel: %s.",
                         announcer.getUser(),
                         announcer.getChannelId()
                     )
