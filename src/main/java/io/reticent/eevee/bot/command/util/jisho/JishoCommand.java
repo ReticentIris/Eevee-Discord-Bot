@@ -97,6 +97,7 @@ public class JishoCommand extends Command {
         return japaneseList.stream()
                            .map(japanese -> {
                                if (japanese.getWord() == null) return japanese.getReading();
+                               if (japanese.getReading() == null) return japanese.getWord();
                                return String.format("%s (%s)", japanese.getWord(), japanese.getReading());
                            })
                            .collect(Collectors.joining(", "));
