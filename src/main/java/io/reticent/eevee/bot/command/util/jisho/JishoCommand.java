@@ -3,7 +3,6 @@ package io.reticent.eevee.bot.command.util.jisho;
 import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.bot.command.Command;
 import io.reticent.eevee.bot.command.CommandArguments;
-import io.reticent.eevee.parser.arguments.Argument;
 import io.reticent.eevee.parser.arguments.Arguments;
 import io.reticent.eevee.parser.arguments.LiteralArgument;
 import io.reticent.eevee.parser.arguments.StringArgument;

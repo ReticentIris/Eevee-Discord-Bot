@@ -19,7 +19,6 @@ import io.reticent.eevee.util.RateLimiter;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
-import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
