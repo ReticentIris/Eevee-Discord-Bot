@@ -1,6 +1,7 @@
 conf/Eevee.json
 conf/Eevee.Google.json
 logs/
+*.iml
 
 ######################################################
 

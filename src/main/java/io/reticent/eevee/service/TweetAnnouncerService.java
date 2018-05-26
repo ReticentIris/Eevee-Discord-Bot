@@ -75,6 +75,14 @@ public class TweetAnnouncerService implements Service {
 
             log.debug(String.format("Found tweets from %s.", announcer.getUser()));
 
+            log.debug(
+                String.format(
+                    "Latest tweet found: %s. Announcer last tweet seen: %s.",
+                    latestTweets.get(0).getId(),
+                    announcer.getLastTweetId()
+                )
+            );
+
             // No new tweets. Skip!
             if (latestTweets.get(0).getId() == announcer.getLastTweetId()) {
                 return;
