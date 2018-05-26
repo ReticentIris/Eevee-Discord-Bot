@@ -3,10 +3,12 @@ package io.reticent.eevee.service;
 import com.google.common.collect.ImmutableList;
 import io.reticent.eevee.provider.HSReleaseDataProvider;
 import io.reticent.eevee.provider.model.HSReleaseData;
+import io.reticent.eevee.repository.HSReleaseAnnouncerDataRepository;
 import io.reticent.eevee.repository.model.HSReleaseAnnouncer;
 import io.reticent.eevee.session.Session;
 import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.TextChannel;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,6 +65,8 @@ public class HSReleaseAnnouncerService implements Service {
 
             log.debug(String.format("Found %s matching announcers for release: %s", test.size(), releaseData));
 
+            assert test != null;
+
             test.forEach(a -> {
                 EmbedBuilder embedBuilder = new EmbedBuilder();
                 embedBuilder.setTitle(
@@ -73,17 +77,19 @@ public class HSReleaseAnnouncerService implements Service {
                 embedBuilder.addField("Format", releaseData.getFormat(), true);
                 embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
 
-                Session.getSession()
-                       .getJdaClient()
-                       .getTextChannelById(a.getChannelId())
-                       .sendMessage(embedBuilder.build())
-                       .queue();
+                TextChannel channel = Session.getSession()
+                                                     .getJdaClient()
+                                                     .getTextChannelById(a.getChannelId());
 
-                log.debug(String.format("Issued announcement for new release to channel: %s.'", a.getChannelId()));
-
-                a.setLastEpisode(releaseData.getEpisode());
-
-                Session.getSession().getHsReleaseAnnouncerDataRepository().update(a);
+                if (channel != null) {
+                    channel.sendMessage(embedBuilder.build()).queue();
+                    log.debug(String.format("Issued announcement for new release to channel: %s.'", a.getChannelId()));
+                    a.setLastEpisode(releaseData.getEpisode());
+                    Session.getSession().getHsReleaseAnnouncerDataRepository().update(a);
+                } else {
+                    log.debug("Found announcer for channel that no longer exists. Removing announcer.");
+                    Session.getSession().getHsReleaseAnnouncerDataRepository().remove(a);
+                }
             });
         }
     }

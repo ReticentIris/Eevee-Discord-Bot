@@ -8,6 +8,7 @@ import io.reticent.eevee.session.Session;
 import lombok.extern.log4j.Log4j2;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.core.entities.TextChannel;
 import twitter4j.Status;
 
 import java.util.*;
@@ -108,19 +109,25 @@ public class TweetAnnouncerService implements Service {
 
                 Session.getSession().getTweetAnnouncerDataRepository().update(announcer);
 
-                Session.getSession()
-                       .getJdaClient()
-                       .getTextChannelById(announcer.getChannelId())
-                       .sendMessage(createEmbed(tweet))
-                       .queue();
+                TextChannel channel = Session.getSession()
+                                             .getJdaClient()
+                                             .getTextChannelById(announcer.getChannelId());
 
-                log.debug(
-                    String.format(
-                        "Issued announcement for new tweet from %s to channel: %s.",
-                        announcer.getUser(),
-                        announcer.getChannelId()
-                    )
-                );
+                if (channel != null) {
+                    channel.sendMessage(createEmbed(tweet)).queue();
+
+                    log.debug(
+                        String.format(
+                            "Issued announcement for new tweet from %s to channel: %s.",
+                            announcer.getUser(),
+                            announcer.getChannelId()
+                        )
+                    );
+                } else {
+                    Session.getSession().getTweetAnnouncerDataRepository().remove(announcer);
+
+                    log.debug("Found announcer for channel that no longer exists. Removing announcer.");
+                }
             });
         });
     }
