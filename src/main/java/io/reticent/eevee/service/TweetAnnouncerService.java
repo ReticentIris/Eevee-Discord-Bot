@@ -114,7 +114,11 @@ public class TweetAnnouncerService implements Service {
                                              .getTextChannelById(announcer.getChannelId());
 
                 if (channel != null) {
-                    channel.sendMessage(createEmbed(tweet)).queue();
+                    channel.sendMessage(createEmbed(tweet)).queue((message) -> {
+                        // Purposely empty...
+                    }, error -> {
+                        log.error(String.format("Failed to send tweet announcement to channel %s.", channel.getId()), error);
+                    });
 
                     log.debug(
                         String.format(
