@@ -122,7 +122,7 @@ public class TweetAnnouncerService implements Service {
 
             List<Status> newTweets = latestTweets;
 
-            if (latestSeen == latestTweets.size()) {
+            if (latestSeen < latestTweets.size()) {
                 newTweets = latestTweets.subList(latestSeen, latestTweets.size());
             }
 
