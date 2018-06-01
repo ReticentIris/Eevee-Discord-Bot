@@ -70,6 +70,8 @@ public class TweetAnnouncerService implements Service {
 
                 latestTweetMap.put(announcer.getUser().toLowerCase(), latestTweetsOptional.get());
                 latestTweets = latestTweetsOptional.get();
+                // Reverse the list so that we can send them in order of tweet creation.
+                Collections.reverse(latestTweets);
             } else {
                 latestTweets = latestTweetMap.get(announcer.getUser().toLowerCase());
             }
@@ -93,8 +95,6 @@ public class TweetAnnouncerService implements Service {
             log.debug("Found new tweets for this announcer. Processing tweets.");
 
             // Need to handle multiple new tweets between check intervals.
-            // Reverse the list so that we can send them in order of tweet creation.
-            Collections.reverse(latestTweets);
 
             // Find the last tweet seen.
             int latestSeen = 0;
