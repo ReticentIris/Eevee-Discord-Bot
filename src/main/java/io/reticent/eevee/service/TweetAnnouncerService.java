@@ -72,6 +72,8 @@ public class TweetAnnouncerService implements Service {
                  tweets and not know where to start announcing.
 
                  Look into tweet stream API to stream new tweets maybe? How would we handle downtime in this case?
+
+                 Maybe we should switch to timestamps for indexing?
                   */
 
                 Optional<List<Status>> latestTweetsOptional = TwitterTweetProvider.getLatestTweets(announcer.getUser(), GlobalConfiguration.TWEET_FETCH_COUNT);
