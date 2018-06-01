@@ -86,8 +86,11 @@ public class TweetAnnouncerService implements Service {
 
             // No new tweets. Skip!
             if (latestTweets.get(0).getId() == announcer.getLastTweetId()) {
+                log.debug("Found no new tweets for this announcer. Skipping.");
                 return;
             }
+
+            log.debug("Found new tweets for this announcer. Processing tweets.");
 
             // Need to handle multiple new tweets between check intervals.
             // Reverse the list so that we can send them in order of tweet creation.
@@ -102,20 +105,21 @@ public class TweetAnnouncerService implements Service {
 
             latestSeen++;
 
-            List<Status> newTweets = latestTweets.subList(latestSeen, latestTweets.size());
+            List<Status> newTweets = latestTweets;
+
+            if (latestSeen == latestTweets.size()) {
+                newTweets = latestTweets.subList(latestSeen, latestTweets.size());
+            }
 
             newTweets.forEach(tweet -> {
-                announcer.setLastTweetId(tweet.getId());
-
-                Session.getSession().getTweetAnnouncerDataRepository().update(announcer);
-
                 TextChannel channel = Session.getSession()
                                              .getJdaClient()
                                              .getTextChannelById(announcer.getChannelId());
 
                 if (channel != null) {
                     channel.sendMessage(createEmbed(tweet)).queue((message) -> {
-                        // Purposely empty...
+                        announcer.setLastTweetId(tweet.getId());
+                        Session.getSession().getTweetAnnouncerDataRepository().update(announcer);
                     }, error -> {
                         log.error(String.format("Failed to send tweet announcement to channel %s.", channel.getId()), error);
                     });
@@ -129,7 +133,6 @@ public class TweetAnnouncerService implements Service {
                     );
                 } else {
                     Session.getSession().getTweetAnnouncerDataRepository().remove(announcer);
-
                     log.debug("Found announcer for channel that no longer exists. Removing announcer.");
                 }
             });
@@ -141,7 +144,7 @@ public class TweetAnnouncerService implements Service {
         embedBuilder.setColor(Session.getSession().getConfiguration().readInt("defaultEmbedColorDecimal"));
         embedBuilder.setTitle(
             String.format("New Tweet From %s", tweet.getUser().getName()),
-            String.format(GlobalConfiguration.TWITTER_PERMALINK, tweet.getUser().getName(), tweet.getId())
+            String.format(GlobalConfiguration.TWITTER_PERMALINK, tweet.getUser().getScreenName(), tweet.getId())
         );
         embedBuilder.setDescription(tweet.getText());
         embedBuilder.setFooter(

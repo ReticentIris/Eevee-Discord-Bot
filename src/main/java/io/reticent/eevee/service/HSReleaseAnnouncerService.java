@@ -82,10 +82,13 @@ public class HSReleaseAnnouncerService implements Service {
                                                      .getTextChannelById(a.getChannelId());
 
                 if (channel != null) {
-                    channel.sendMessage(embedBuilder.build()).queue();
-                    log.debug(String.format("Issued announcement for new release to channel: %s.'", a.getChannelId()));
-                    a.setLastEpisode(releaseData.getEpisode());
-                    Session.getSession().getHsReleaseAnnouncerDataRepository().update(a);
+                    channel.sendMessage(embedBuilder.build()).queue((message) -> {
+                        log.debug(String.format("Issued announcement for new release to channel: %s.'", a.getChannelId()));
+                        a.setLastEpisode(releaseData.getEpisode());
+                        Session.getSession().getHsReleaseAnnouncerDataRepository().update(a);
+                    }, (error) -> {
+                        log.error(String.format("Failed to send release announcement to channel %s.", channel.getId()), error);
+                    });
                 } else {
                     log.debug("Found announcer for channel that no longer exists. Removing announcer.");
                     Session.getSession().getHsReleaseAnnouncerDataRepository().remove(a);

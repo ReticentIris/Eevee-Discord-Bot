@@ -51,7 +51,6 @@ public class ReminderService implements Service {
                     ));
                 }, (error) -> {
                     log.error("Failed to open private text channel to issue reminder.", error);
-                    error.printStackTrace();
                 });
             }
         };
