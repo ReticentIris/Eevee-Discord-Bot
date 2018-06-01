@@ -61,6 +61,19 @@ public class TweetAnnouncerService implements Service {
             List<Status> latestTweets;
 
             if (!latestTweetMap.containsKey(announcer.getUser().toLowerCase())) {
+                /*
+                 This should be replaced with a more permanent solution where we build up a list of unseen tweets.
+
+                 1. If the latest tweet seen is not in the fetch count: keep fetching until it is in the list
+                 2. Save the new list to be used by other announcers for this single check
+
+                 Questions:
+                 How do we handle the case where a deleted tweet is the latest seen tweet? We would fetch all the
+                 tweets and not know where to start announcing.
+
+                 Look into tweet stream API to stream new tweets maybe? How would we handle downtime in this case?
+                  */
+
                 Optional<List<Status>> latestTweetsOptional = TwitterTweetProvider.getLatestTweets(announcer.getUser(), GlobalConfiguration.TWEET_FETCH_COUNT);
 
                 if (!latestTweetsOptional.isPresent()) {
