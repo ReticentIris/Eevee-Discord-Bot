@@ -102,7 +102,7 @@ public class TweetAnnouncerService implements Service {
             );
 
             // No new tweets. Skip!
-            if (latestTweets.get(0).getId() == announcer.getLastTweetId()) {
+            if (latestTweets.get(latestTweets.size() - 1).getId() == announcer.getLastTweetId()) {
                 log.debug("Found no new tweets for this announcer. Skipping.");
                 return;
             }
